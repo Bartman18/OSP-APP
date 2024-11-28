@@ -13,5 +13,6 @@ Przykład konfiguracji:
 SQLALCHEMY_DATABASE_URI = 'postgresql://username:password@localhost/dbname'
 pip install Flask-Migrate
 
+flask db init
 flask db migrate
 flask db upgrade
