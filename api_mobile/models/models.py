@@ -9,10 +9,16 @@ db = SQLAlchemy()
 
 
 class User(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(80), unique=True, nullable=False)
+    __tablename__ = 'user'  # Explicit table name
+    user_id = db.Column(db.Integer, primary_key=True)
+    first_name = db.Column(db.String(50), nullable=False)
+    last_name = db.Column(db.String(50), nullable=False)
     email = db.Column(db.String(120), unique=True, nullable=False)
+    phone = db.Column(db.Numeric(11), unique=True, nullable=False)
+    joined_at = db.Column(db.DateTime, nullable=False)
+    admin = db.Column(db.Integer, nullable=False)
     password_hash = db.Column(db.LargeBinary(60), nullable=False)  # Change to store binary data
+    user_confirmed = db.Column(db.Boolean, nullable=False, default=False)
 
     def set_password(self, password):
         # Hash the password using bcrypt
@@ -24,26 +30,33 @@ class User(db.Model):
         return bcrypt.checkpw(password.encode('utf-8'), self.password_hash)
 
 class Event(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(80), nullable=False)
-    date = db.Column(db.DateTime, nullable=False)
+    __tablename__ = 'event'  # Ensure this table name is set to 'event'
+    event_id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(80), nullable=False)
+    event_date = db.Column(db.DateTime, nullable=False)
     place = db.Column(db.String(80), nullable=False)
-    type = db.Column(db.String(80),  nullable=False)
+    type = db.Column(db.String(80), nullable=False)
     description = db.Column(db.Text, nullable=False)
     person_limit = db.Column(db.Integer, nullable=False)
-    # confirmed = db.Column(db.Boolean, nullable=False)
-    # user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    event_confirmed = db.Column(db.Boolean, nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.user_id'), nullable=False)
 
 
-class Parcipitation(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-    event_id = db.Column(db.Integer, db.ForeignKey('event.id'), nullable=False)
+class Participation(db.Model):
+    __tablename__ = 'participation'  # Make sure table name is correct
+    participation_id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.user_id'), nullable=False)
+    event_id = db.Column(db.Integer, db.ForeignKey('event.event_id'), nullable=False)
     status = db.Column(
-        Enum('Participation','reserve','cancelled'), nullable=False)
+        Enum('Participation', 'reserve', 'cancelled', name='status_enum'), nullable=False
+    )
     signed_data = db.Column(db.Text, nullable=False)
 
+class Courses(db.Model):
+    __tablename__ = 'courses'  # Make sure table name is correct
+    course_id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.user_id'), nullable=False)
+    course_type = db.Column(db.String(80), nullable=False)
+    obtained_date = db.Column(db.DateTime, nullable=False)
+    expiry_date = db.Column(db.DateTime, nullable=False)
 
-# 8. Tabela attendance (frekwencja na spotkaniach/szkoleniach)
-
-#role id_roli nazwa roli enum

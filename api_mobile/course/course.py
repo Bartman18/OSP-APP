@@ -1,0 +1,4 @@
+# dodawania
+# usuwanie
+#edytowanie
+# wyswietlanie
