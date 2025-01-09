@@ -1,0 +1,249 @@
+{
+  "appName": "TOP6",
+  "errors": {
+    "header": "Something went wrong",
+    "generic": {
+      "header": "Something went wrong",
+      "button": "Go back",
+      "check_connection": "Check your internet connection and try again later."
+    },
+    "update_required": {
+      "header": "New version available",
+      "description": "You have to download newest application version before you can use it.",
+      "store": {
+        "android": "Open Google Play",
+        "ios": "Open App Store"
+      }
+    },
+    "permissions": {
+      "general_header": "Permissions denied",
+      "camera_description_ios": "App does not have access to phone's camera. To activate it, please go to Settings > Privacy & Security > Camera and set switch on next to application.",
+      "camera_description_android": "App does not have access to phone's camera. To activate, hold your finger on app's icon and select \"About\" option, then Permissions > Camera.",
+      "gallery_description_ios": "App does not have access to Photos. To activate it, please go to Settings > Privacy & Security > Photos and set switch on next to application.",
+      "gallery_description_android": "App does not have access to phone's gallery. To activate, hold your finger on app's icon and select \"About\" option, then Permissions > Photos and movies."
+    },
+    "user_profile": {
+      "cant_save": "There was an error while we were trying to save your profile. Try again after a while, and if the problem recurs, please contact us.",
+      "saved_but_without_pfp": "Your profile was saved correctly, but unfortunately we weren't able to save your profile picture. Try again after a while, and if the problem recurs, please contact us."
+    },
+    "external_sign_up": {
+      "base_description": "We weren't able to log you in using {provider}. Try again after a while, and if the problem recurs, please contact us",
+      "providers": {
+        "google": "Google",
+        "facebook": "facebook",
+        "apple": "Apple ID"
+      }
+    },
+    "unknown": "An unknown error occured."
+  },
+  "onboarding": {
+    "predict": "PREDICT",
+    "matches": "MATCHES",
+    "header": {
+      "1": "GET \nREWARDS"
+    },
+    "chooseSix": "Choose correctly 6 scores and win main reward!\n\nJoin now to the TOP6 league"
+  },
+  "buttons": {
+    "signUp": "Sign Up",
+    "logIn": "Have an account already? Log In"
+  },
+  "signUp": {
+    "title": "Create new account",
+    "titleTwo": "Log In",
+    "phoneNumber": "Phone number",
+    "or_continue_with": "or continue with",
+    "terms_and_conditions": "Terms and Conditions",
+    "privacy_policy": "Privacy policy",
+    "buttonText": "Create account",
+    "buttonTextTwo": "Log In",
+    "form": {
+      "errors": {
+        "required": "This field is required",
+        "numeric": "Enter correct number",
+        "tos": "Terms of Service and privacy policy hasn't been accepted"
+      }
+    },
+    "tosAccept": {
+      "partOne": "I accept ",
+      "tos": "Terms of Service ",
+      "partTwo": "and ",
+      "privacy": "privacy policy."
+    }
+  },
+  "verifyAccount": {
+    "title": "Phone number verification",
+    "sub_title": "Enter the 4-digit verification code",
+    "no_code_received": "No code received?",
+    "buttons": {
+      "resend": "Send again",
+      "next": "Continue"
+    },
+    "errors": {
+      "invalid_code": "The entered code is invalid. Try again."
+    }
+  },
+  "widgets": {
+    "circular_image_uploader": {
+      "label": "Profile picture",
+      "subLabel": "Optional"
+    },
+    "bottom_sheet": {
+      "take_photo": "Take photo",
+      "select_photo_from_gallery": "Select photo from gallery",
+      "ok": "OK",
+      "yes": "Yes",
+      "no": "No",
+      "send": "Send",
+      "back": "Back"
+    }
+  },
+
+  "userProfile": {
+    "header": "It's time to complete your profile",
+    "subHeader": "Great to have you. Let's get to know each other better!",
+    "loader": {
+      "save_data": "We're updating your profile..."
+    },
+    "form": {
+      "name": "Name",
+      "name_hint": "Type your name",
+      "optional": "Optional",
+      "direction": "In which direction do you want to develop?",
+      "direction_hint": "Select from the list",
+      "continue": "Continue",
+      "save": "Save",
+      "skip": "Skip",
+      "errors": {
+        "required": "Field above is required",
+        "too_long": "Provided content is too long",
+        "not_enough_directions": "You have to select at least 1 direction"
+      }
+    }
+  },
+
+  "subscription": {
+    "hint": "Unlock full access",
+    "header": "Choose your package",
+    "steps": {
+      "header": "What you get?",
+      "1": "Access to TOP of the TOP league",
+      "2": "No ads",
+      "3": "Check what other players type",
+      "4": "Win premium prizes",
+      "5": "Save money with yearly subscription"
+    },
+    "monthly": {
+      "header": "Month",
+      "hint": "Pay monthly",
+      "price": "19,99 PLN"
+    },
+    "yearly": {
+      "header": "Year",
+      "hint": "Pay for one year",
+      "price": "149,99 PLN"
+    },
+    "rules": "Game rules",
+    "info": "You can opt out at any time.",
+    "button": "Subscribe",
+    "skip": "Continue with free version"
+  },
+
+  "main_view": {
+    "header": "For You",
+    "comments": "Comments",
+    "no_comments": "This post has no comments.",
+    "add_comment": "Add comment",
+    "article": {
+      "time": {
+        "just_now": "Just now",
+        "today": "Today",
+        "yesterday": "Yesterday"
+      }
+    }
+  },
+
+  "settings_view": {
+    "header": "Settings",
+    "subHeader": "Manage App",
+    "connect": {
+      "header": "Connected Accounts",
+      "hint": "Manage Connected Accounts",
+      "options": {
+        "phone": "Phone Number",
+        "phone_hint": "Primary Login Method",
+        "not_connected": "Click to Connect",
+        "connected": "Connected",
+        "google": "Google",
+        "facebook": "Facebook",
+        "apple": "Apple"
+      }
+    },
+    "share": {
+      "header": "Invite Friends",
+      "hint": "Send an invitation to Evo",
+      "title":"Check out EVO",
+      "text": "I liked this app and I think you will too. Check it out!",
+      "chooserTitle": "Share EVO"
+
+    },
+    "rate": {
+      "header": "Rate us on the App Store",
+      "hint": "Vote your opinion on the app in the Store!"
+
+    },
+    "notifications": {
+      "header": "Notifications",
+      "hint": "Notification settings"
+
+    },
+    "pushNotifications": {
+      "header": "Push notifications",
+      "hint": "Turn notifications on/off"
+
+    },
+    "support": {
+      "header": "Report a problem",
+      "hint": "Get help from the Evo team"
+
+    },
+    "form": {
+      "message": "Report content",
+      "sent": "Report sent",
+      "errors": {
+        "required": "The above field is required",
+        "minLength": "Message is too short"
+      }
+    },
+    "logout": "Log out",
+    "logout_hint": "Are you sure you want to log out?"
+
+  },
+  "home_view": {
+      "header": {
+        "hello": "Hi",
+        "you_have": "You have",
+        "points": "pt"
+      },
+      "play": "Play"
+  },
+  "match_tile": {
+    "stats": "Stats",
+    "form": "Form",
+    "type": "Players types",
+    "draw": "Draw"
+  },
+  "leagues": {
+    "header": {
+      "general": "Genral league",
+      "top": "top of the top league",
+      "private": "Private league"
+    },
+    "private": {
+      "main_text": "Nie należysz do ligi prywatnej",
+      "subtext": "Liga prywatna umożliwia Ci rywalizację ze znajomymi. Możesz dołączyć do ligi poprzez kod lub założyć własną.",
+      "make": "Załóż ligę prywatną",
+      "join": "Dołącz poprzez kod"
+    }
+  }
+}
