@@ -1,0 +1,1 @@
+enum EmailVerificationType { register, resetPassword }

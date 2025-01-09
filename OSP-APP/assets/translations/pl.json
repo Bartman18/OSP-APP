@@ -1,0 +1,245 @@
+{
+  "appName": "TOP6",
+  "errors": {
+    "header": "Coś poszło nie tak",
+    "generic": {
+      "header": "Coś poszło nie tak",
+      "button": "Wróć",
+      "check_connection": "Sprawdź swoje połączenie z internetem i spróbuj ponownie później."
+    },
+    "update_required": {
+      "header": "Dostępna nowa wersja",
+      "description": "Aktualizacja aplikacji jest wymagana, by móc z niej dalej korzystać.",
+      "store": {
+        "android": "Otwórz Google Play",
+        "ios": "Otwórz App Store"
+      }
+    },
+    "permissions": {
+      "general_header": "Brak uprawnień",
+      "camera_description_ios": "Aplikacja nie ma dostępu do aparatu telefonu. By nadać uprawnienia należy wejść w Ustawienia > Prywatność i ochrona > Aparat i uaktywnić przełącznik obok nazwy aplikacji.",
+      "camera_description_android": "Aplikacja nie ma dostępu do aparatu telefonu. By nadać uprawnienia należy przytrzymać ikonę aplikacji, wybrać pozycję \"O aplikacji\", a następnie Uprawnienia > Aparat.",
+      "gallery_description_ios": "Aplikacja nie ma dostępu do Zdjęć. By nadać uprawnienia należy wejść w Ustawienia > Prywatność i ochrona > Zdjęcia i uaktywnić przełącznik obok nazwy aplikacji.",
+      "gallery_description_android": "Aplikacja nie ma dostępu do galerii zdjęć. By nadać uprawnienia należy przytrzymać ikonę aplikacji, wybrać pozycję \"O aplikacji\", a następnie Uprawnienia > Zdjęcia i filmy."
+    },
+    "user_profile": {
+      "cant_save": "Wystąpił błąd podczas zapisu profilu. Spróbuj ponownie za chwilę, a jeśli problem się powtarza, skontaktuj się z nami.",
+      "saved_but_without_pfp": "Twój profil został zapisany, ale nie udało się wgrać Twojego zdjęcia. Spróbuj ponownie za chwilę, a jeśli problem powraca, skontaktuj się z nami."
+    },
+    "external_sign_up": {
+      "base_description": "Nie udało się zalogować przy użyciu {provider}. Prosimy spróbować jeszcze raz za chwilę bądź użyć innej metody logowania. Skontaktuj się z nami, jeśli problem się powtarza.",
+      "providers": {
+        "google": "Google",
+        "facebook": "Facebooka",
+        "apple": "Apple ID"
+      }
+    },
+    "unknown": "Wystąpił nieznany błąd"
+  },
+  "onboarding": {
+    "mremiza": "mRemiza",
+    "header": "Sprawdź wydarzenia z swojej remizy już teraz!"
+  },
+  "buttons": {
+    "signUp": "Utwórz konto",
+    "logIn": "Masz już konto? Zaloguj się"
+  },
+  "signUp": {
+    "title": "Utwórz nowe konto",
+    "titleTwo": "Zaloguj się",
+    "phoneNumber": "Numer telefonu",
+    "or_continue_with": "lub kontynuuj z",
+    "terms_and_conditions": "Regulamin",
+    "privacy_policy": "Polityka prywatności",
+    "buttonText": "Utwórz konto",
+    "buttonTextTwo": "Zaloguj się",
+    "form": {
+      "errors": {
+        "required": "To pole jest wymagane",
+        "numeric": "Wpisz poprawny numer",
+        "tos": "Regulamin i polityka prywatności nie zostały zaakceptowane"
+      }
+    },
+    "tosAccept": {
+      "partOne": "Akceptuję ",
+      "tos": "regulamin ",
+      "partTwo": "i ",
+      "privacy": "politykę prywatności."
+    }
+  },
+  "verifyAccount": {
+    "title": "Weryfikacja numeru telefonu",
+    "sub_title": "Wpisz 4-cyfrowy kod weryfikacyjny",
+    "no_code_received": "Nie otrzymano kodu?",
+    "buttons": {
+      "resend": "Wyślij ponownie",
+      "next": "Kontynuuj"
+    },
+    "errors":{
+      "invalid_code": "Wprowadzony kod jest nieprawidłowy. Spróbuj ponownie."
+    }
+  },
+  "widgets": {
+    "circular_image_uploader": {
+      "label": "Zdjęcie profilowe",
+      "subLabel": "Opcjonalnie"
+    },
+    "bottom_sheet": {
+      "take_photo": "Zrób zdjęcie",
+      "select_photo_from_gallery": "Wybierz z galerii",
+      "ok": "OK",
+      "yes": "Tak",
+      "no": "Nie",
+      "send": "Wyślij",
+      "back": "Wróć"
+    },
+    "bottom_bar": {
+      "play": "Graj",
+      "general": "Ogólny",
+      "private": "Prywatna",
+      "top": "Top"
+    }
+  },
+
+  "userProfile": {
+    "header": "Konfiguracja",
+    "subHeader": "Dodaj informacje o sobie",
+    "loader": {
+      "save_data": "Aktualizujemy Twój profil..."
+    },
+    "form": {
+      "name": "Nick",
+      "name_hint": "Ustaw swój nick",
+      "optional": "Opcjonalne",
+      "direction": "W jakim kierunku chcesz się rozwijać?",
+      "direction_hint": "Wybierz z listy",
+      "continue": "Kontynuuj",
+      "save": "Zapisz",
+      "skip": "Na razie pomiń",
+      "errors": {
+        "required": "Powyższe pole jest wymagane",
+        "too_long": "Wprowadzona wartość jest zbyt długa",
+        "not_enough_directions": "Musisz wskazać co najmniej jeden kierunek"
+      }
+    }
+  },
+
+  "subscription": {
+    "hint": "Odblokuj pełny dostęp",
+    "header": "Wybierz swój pakiet",
+    "steps": {
+      "header": "Co zyskasz?",
+      "1": "Dostęp do Ligi TOP of the TOP",
+      "2": "Całkowity brak reklam",
+      "3": "Sprawdzaj typy innych użytkowników",
+      "4": "98% hazardzistów kończy przed największą wygraną",
+      "5": "Za kupienie droższej subskrypcji nic nie trafisz"
+    },
+    "monthly": {
+      "header": "Miesiąc",
+      "hint": "Płać co miesiąc",
+      "price": "19,99 PLN"
+    },
+    "yearly": {
+      "header": "Rok",
+      "hint": "Zapłać za rok",
+      "price": "149,99 PLN"
+    },
+    "rules": "Zasady gry",
+    "info": "Możesz zrezygnować w dowolnym momencie.",
+    "button": "Subskrybuję",
+    "skip": "Kontynuuj z darmową wersją"
+  },
+
+  "main_view": {
+    "header": "Dla Ciebie",
+    "comments": "Komentarze",
+    "no_comments": "Ten wpis nie ma komentarzy.",
+    "add_comment": "Dodaj komentarz",
+    "article": {
+      "time": {
+        "just_now": "Przed chwilą",
+        "today": "Dzisiaj",
+        "yesterday": "Wczoraj"
+      }
+    }
+  },
+
+  "settings_view": {
+    "header": "Ustawienia",
+    "rules": {
+      "header": "Zasady gry",
+      "hint": "Poznaj zasady TOP6"
+    },
+    "subscription": {
+      "header": "Wykup subskrypcje",
+      "hint": "Bądz Premium"
+    },
+    "prizes": {
+      "header": "Twoje wygrane",
+      "hint": "Przyznane nagrody"
+    },
+    "history": {
+      "header": "Historia wyników",
+      "hint": "Tabela Twoich typów"
+    },
+    "rate": {
+      "header": "Oceń nas w App Store",
+      "hint": "Wyraź opinię o aplikacji w Sklepie!"
+    },
+    "payment": {
+      "header": "Płatności i subskrypcje",
+      "hint": "Zarządzaj subskrypcją"
+    },
+    "notifications": {
+      "header": "Powiadomienia",
+      "hint": "Ustawienia powiadomień"
+    },
+    "pushNotifications": {
+      "header": "Powiadomienia Push",
+      "hint": "Włącz / wyłącz notyfikacje"
+    },
+    "support": {
+      "header": "Zgłoś problem",
+      "hint": "Uzyskaj pomoc od zespołu Evo"
+    },
+    "form": {
+      "message": "Treść zgłoszenia",
+      "sent": "Wysłano zgłoszenie",
+      "errors": {
+        "required": "Powyższe pole jest wymagane",
+        "minLength": "Za krótka wiadomość"
+      }
+    },
+    "logout": "Wyloguj się",
+    "logout_hint": "Czy na pewno chcesz się wylogować?"
+  },
+  "home_view": {
+      "header": {
+        "hello": "Cześć",
+        "you_have": "Masz",
+        "points": "pkt"
+      },
+      "play": "Graj"
+  },
+  "match_tile": {
+    "stats": "Statystyki",
+    "form": "Forma",
+    "type": "Typy graczy",
+    "draw": "Remis"
+  },
+  "leagues": {
+    "header": {
+      "general": "Liga ogólna",
+      "top": "Liga top of the top",
+      "private": "Liga prywatna"
+    },
+    "private": {
+      "main_text": "Nie należysz do ligi prywatnej",
+      "subtext": "Liga prywatna umożliwia Ci rywalizację ze znajomymi. Możesz dołączyć do ligi poprzez kod lub założyć własną.",
+      "make": "Załóż ligę prywatną",
+      "join": "Dołącz poprzez kod"
+    }
+  }
+
+}
