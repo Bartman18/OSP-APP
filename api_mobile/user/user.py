@@ -32,10 +32,10 @@ def get_user(user_id):
 def register_user():
     data = request.get_json()
 
-    if not data or not data.get('username') or not data.get('password') or not data.get('email'):
+    if not data or not data.get('email') or not data.get('password') or not data.get('email'):
         return jsonify({"error": "Invalid input"}), 400
 
-    if User.query.filter_by(username=data['username']).first() or User.query.filter_by(email=data['email']).first():
+    if User.query.filter_by(email=data['email']).first() or User.query.filter_by(phone=data['phone']).first():
         return jsonify({"error": "User already exists"}), 400
 
     # Hash the password using bcrypt
@@ -44,8 +44,10 @@ def register_user():
 
     # Create a new user with hashed password
     new_user = User(
-        username=data['username'],
+        first_name=['first_name'],
+        last_name =['last_name'],
         email=data['email'],
+        phone=['phone'],
         password_hash=hashed_password  # Save hashed password as binary
     )
     db.session.add(new_user)
@@ -61,11 +63,11 @@ def login():
     data = request.get_json()
 
     # Validate input data
-    if not data or not data.get('username') or not data.get('password'):
+    if not data or not data.get('email') or not data.get('password'):
         return jsonify({"error": "Invalid input"}), 400
 
     # Fetch the user from the database
-    user = User.query.filter_by(username=data['username']).first()
+    user = User.query.filter_by(email=data['email']).first()
 
     # Check if user exists and verify password
     if not user or not user.check_password(data['password']):
@@ -92,3 +94,23 @@ def protected():
         "message": "You are accessing a protected route!",
         "user_id": current_user_id
     }), 200
+
+
+
+
+@user_bp.route('/confirmed', methods=['GET'])
+def not_confirmed_user():
+
+    users = User.query.filter_by(user_confirmed='false')
+
+    return jsonify([
+        {
+            "user_id":user.id,
+            "first_name": user.first_name,
+            "last_name": user.last_name,
+            "email":user.email,
+            "phone":user.phone,
+            "confirmed":user.user_confirmed,
+        }
+        for user in users
+    ])
