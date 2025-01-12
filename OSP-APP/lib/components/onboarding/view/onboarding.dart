@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fox_core/components/add_event/add_event.dart';
 import 'package:fox_core/components/onboarding/bloc/onboarding_bloc.dart';
 import 'package:fox_core/components/sign_up/bloc/sign_up_state.dart';
 import 'package:fox_core/components/sign_up/sign_in_or_up_provider.dart';
@@ -228,7 +229,8 @@ class _OnboardingState extends State<Onboarding> {
                                 ),
                               ),
                             ],
-                          ),
+                          ),          
+                      AddEventButton(), 
                     ],
                   ),
                 ),

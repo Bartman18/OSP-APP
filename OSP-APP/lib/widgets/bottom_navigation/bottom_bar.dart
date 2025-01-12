@@ -1,10 +1,11 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:fox_core/components/add_event/add_event.dart';
 import 'package:fox_core/core/appearance.dart';
 import 'package:fox_core/core/routes.dart';
 
-enum BottomBarTab { none, home, generalLeague, privateLeague, topLeague }
+enum BottomBarTab { none, home, calendar, myEvents, onboarding }
 
 class BottomBar extends StatefulWidget {
   final bool disableButtonClicks;
@@ -23,36 +24,45 @@ class BottomBar extends StatefulWidget {
 class _BottomBarState extends State<BottomBar> {
   final List<BottomBarButtonInfo> _bottomBarItems = [
     BottomBarButtonInfo(
+      BottomBarTab.myEvents,
+      'assets/icons/MyEvents.png',
+      Routes.myEvents,
+      'Moje',
+    ),
+    BottomBarButtonInfo(
       BottomBarTab.home,
-      'assets/icons/six.svg',
+      'assets/icons/MainPage.png',
       Routes.home,
-      'widgets.bottom_bar.play'.tr(),
+      'Główna',
+    ),BottomBarButtonInfo(
+      BottomBarTab.onboarding,
+      'assets/icons/MainPage.png',
+      Routes.onboarding,
+      'OnBoarding',
     ),
     BottomBarButtonInfo(
-      BottomBarTab.generalLeague,
-      'assets/icons/world.svg',
-      Routes.generalLeaderboard,
-      'widgets.bottom_bar.general'.tr(),
-    ),
-    BottomBarButtonInfo(
-      BottomBarTab.privateLeague,
-      'assets/icons/lock.svg',
-      Routes.privateLeaderboard,
-      'widgets.bottom_bar.private'.tr(),
-    ),
-    BottomBarButtonInfo(
-      BottomBarTab.topLeague,
-      'assets/icons/trophy_star.svg',
-      Routes.topLeaderboard,
-      'widgets.bottom_bar.top'.tr(),
+      BottomBarTab.calendar,
+      'assets/icons/Calendar.png',
+      Routes.calendar,
+      'Kalendarz',
     ),
   ];
 
   @override
   Widget build(BuildContext context) {
-    return BottomAppBar(
+    return Container( 
+      width: MediaQuery.of(context).size.width,
+      decoration: BoxDecoration(
+      gradient: LinearGradient(
+        colors: [
+          CoreColors.profileTwo,
+          CoreColors.profile,],
+        stops: [0.0, 1.0],
+      )
+    ),
+    child: BottomAppBar(
       color: CoreColors.black.withOpacity(0.8),
-      height: 66.0,
+      height: 100.0,
       shape: const CircularNotchedRectangle(),
       elevation: 0,
       padding: EdgeInsets.symmetric(vertical: 14),
@@ -65,13 +75,14 @@ class _BottomBarState extends State<BottomBar> {
                 onPressed: widget.disableButtonClicks
                     ? null
                     : () => Navigator.pushReplacementNamed(context, item.route),
-                    style: ButtonStyle(
+                    style: const ButtonStyle(
                       backgroundColor: WidgetStateColor.transparent,
                       shadowColor: WidgetStateColor.transparent,
                     ),
                 child: Column(
                   children: [
-                SvgPicture.asset(
+                Image.asset(
+                  width: 45,
                   item.iconPath,
                   color: isSelected ? CoreColors.white : CoreColors.white.withOpacity(0.66), 
                 ),
@@ -87,6 +98,7 @@ class _BottomBarState extends State<BottomBar> {
           );
         }).toList(),
       ),
+    ),
     );
   }
 }

@@ -5,7 +5,6 @@ import 'dart:ui';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:fox_core/components/general_views/home/model/bets.dart';
 import 'package:fox_core/core/appearance.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:fox_core/core/routes.dart';
