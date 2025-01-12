@@ -10,9 +10,9 @@ class EventModel {
   final String place;
   final String type;
   final String description;
-  final String personLimit;
-  final Bool eventConfirmed;
-  final Int userId;
+  final int personLimit;
+  final bool eventConfirmed;
+  final int userId;
 
   EventModel({
     required this.id,
@@ -34,7 +34,7 @@ class EventModel {
       place: json['place'] ?? "",
       type: json['type'] ?? "",
       description: json['description'] ?? "",
-      personLimit: json['person_limit'] ?? "",
+      personLimit: json['person_limit'] ?? 0,
       eventConfirmed: json['event_confirmed'] ?? false,
       userId: json['user_id'] ?? 0,
     );

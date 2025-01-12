@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fox_core/components/general_views/calendar/calendar_provider.dart';
 import 'package:fox_core/components/initializer/initializer_provider.dart';
 import 'package:fox_core/components/onboarding/onboarding_provider.dart';
 import 'package:fox_core/components/sign_up/models/email_verification_arguments.dart';
@@ -7,6 +8,7 @@ import 'package:fox_core/components/user_profile/user_profile_provider.dart';
 import 'package:fox_core/routes/notice/error_require_update.dart';
 import 'package:fox_core/components/settings/settings_provider.dart';
 import 'package:fox_core/components/general_views/dashboard/dashboard_provider.dart';
+import 'package:fox_core/components/general_views/home/my_events_provider.dart';
 
 class Routes {
   static String initializer = '/';
@@ -17,9 +19,8 @@ class Routes {
   static String userProfile = '/user/profile';
   static String errorRequireUpdate = '/error/requireUpdate';
   static String settings = '/settings';
-  static String generalLeaderboard = '/generallLeaderboard';
-  static String topLeaderboard = '/topLeaderboard';
-  static String privateLeaderboard = '/privateLeaderboard';
+  static String calendar = '/calendar';
+  static String myEvents = '/myEvents';
 
   static Route<dynamic> getRoute(RouteSettings settings) {
     if (settings.name == Routes.initializer) {
@@ -45,6 +46,12 @@ class Routes {
     }
     if(settings.name == Routes.home) {
       return MaterialPageRoute(builder: (context) => const DashboardProvider());
+    }
+    if(settings.name == Routes.calendar) {
+      return MaterialPageRoute(builder: (context) => const CalendarProvider());
+    }
+    if(settings.name == Routes.myEvents) {
+      return MaterialPageRoute(builder: (context) => const MyEventsProvider());
     }
     
     return MaterialPageRoute(builder: (context) => const InitializerProvider());

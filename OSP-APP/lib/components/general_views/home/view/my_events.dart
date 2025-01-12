@@ -20,14 +20,14 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:fox_core/core/repositories/user.dart';
 import 'package:get_it/get_it.dart';
 
-class Home extends StatefulWidget {
-  const Home({super.key});
+class MyEvents extends StatefulWidget {
+  const MyEvents({super.key});
 
   @override
-  State<Home> createState() => _HomeState();
+  State<MyEvents> createState() => _MyEventsState();
 }
 
-class _HomeState extends State<Home> {
+class _MyEventsState extends State<MyEvents> {
   final UserRepository _userRepository = GetIt.instance<UserRepository>();
 
   @override
@@ -43,7 +43,6 @@ class _HomeState extends State<Home> {
   
 
   Widget _buildTitleWidget(BuildContext context) {
-    String profilePicture = _userRepository.profile.profilePicture;
     
     return Container(
     decoration: BoxDecoration(
@@ -132,7 +131,27 @@ class _HomeState extends State<Home> {
     );
   }
 
-  
+  Widget _buildSubTitleWidget(BuildContext context) {
+    
+    return Container(
+      height: 56,
+      padding: EdgeInsets.only(left: 24),
+      decoration: BoxDecoration(
+        color: CoreColors.primary.withOpacity(0.5),
+      ),
+      child: Align(
+        alignment: Alignment.centerLeft,
+        
+        child: Text(
+            "Moje Wydarzenia",
+            style: CoreTheme.baseTextStyle.copyWith(
+              color: CoreColors.white,
+              fontSize: 28,
+            ),    
+        ),
+      ),
+    );
+  }
 
   Widget _buildForYou(HomeState state) {
     List<EventModel> _events = [
@@ -156,6 +175,7 @@ class _HomeState extends State<Home> {
           return Wrap(
             children: [
               if (index == 0) _buildTitleWidget(context),
+              _buildSubTitleWidget(context),
                 const SizedBox(height: 30,),
                 Column(
                   children: [

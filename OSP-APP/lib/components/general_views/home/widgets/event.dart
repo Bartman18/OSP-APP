@@ -42,123 +42,97 @@ late EventModel event;
     String locale = context.locale.languageCode;
     double screenWidth = MediaQuery.sizeOf(context).width;
     bool isStatOpen = false;
-    return SizedBox(
-      height: isStatOpen ? 300 : 185,
-      width: screenWidth,
-      child: ClipRRect(
-              borderRadius: BorderRadius.circular(_radius),
-              child: Stack(
-        children: [
-          
-            Container(
-              height: 185,
-              width: screenWidth,
-                child: Image.asset(
-                  'assets/placeholder/stadion.png',
-                  fit: BoxFit.cover,
-                ),
-              ),
-            Container(
-              height: 185,
-              width: screenWidth,
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  colors: [CoreColors.black.withOpacity(0), CoreColors.black.withOpacity(1)],
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                  )
-              ),
-            ),
-          Padding(padding: EdgeInsets.symmetric(horizontal: 20),
-          child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Padding(padding: EdgeInsets.only(top: 10, bottom: 10),
-                child: Text(
-                  "",//DateFormat("dd MMMM, HH:mm").format(date),
-                  
-                  style: CoreTheme.baseTextStyle.copyWith(
-                    color: CoreColors.white,
-                    fontSize: 10,
+    return Column(
+      children: [
+        SizedBox(
+          height: isStatOpen ? 300 : 90,
+          width: screenWidth,
+          child:  Stack(
+            children: [
+              
+                Container(
+                  height: 185,
+                  width: screenWidth,
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: CoreColors.primary
+                      ),
+                    )
                   ),
-                ),
-          ),
-                Row(
-                  children: [
-                    Column(
+              Padding(padding: EdgeInsets.symmetric(horizontal: 20),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text(
-                          "",
-                          style: TextStyle(
-                            color: CoreColors.white,
-                            fontSize: 15,
-                            fontWeight: FontWeight.w400,
-                            fontFamily: "Nasalization",
+                        Container(
+                          width: 150,
+                          height: 44,
+                        child: FittedBox(
+                          fit: BoxFit.contain,
+                        child: Text(
+                            event.title,
+                            textAlign: TextAlign.left,
+                            style: CoreTheme.boldTextStyle.copyWith(
+                              
+                              color: CoreColors.white,
+                              //fontSize: 32,
+                            ),
+                        ),
                           ),
                         ),
-                        
+                        const SizedBox(height: 5), Text(
+                            DateFormat("dd.MM.yyyy").format(event.eventDate),
+                            
+                            style: CoreTheme.baseTextStyle.copyWith(
+                              color: CoreColors.white,
+                              fontSize: 10,
+                            ),
+                          ),
+                        const SizedBox(height: 5),
                       ],
                     ),
-                    const Spacer(flex: 1,),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: [
-                        Text(
-                          "match.team2.name,",
-                          style: TextStyle(
-                            color: CoreColors.white,
-                            fontSize: 15,
-                            fontWeight: FontWeight.w400,
-                            fontFamily: "Nasalization",
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 5),
-                Row(
-                  children: [
-                    Container(
-                      padding: EdgeInsets.all(10),
-                      alignment: Alignment.centerLeft,
-                          decoration: BoxDecoration(
-                            color: CoreColors.white.withOpacity(0.15),
-                            borderRadius: BorderRadius.all(Radius.circular(100))
-                          ),
-                        ),
-                        const Spacer(flex: 1,),
-                    SizedBox(width: 5,),
-                    Text(
-                      "VS",
-                      style: CoreTheme.baseTextStyle.copyWith(
-                        color: CoreColors.white.withOpacity(0.5),
-                        fontFamily: "Nasalization",
-                        fontSize: 13,
-                      ),
-                      ),
-                    SizedBox(width: 5,),
+                  ),
+                  Container(
+                    height: 42,
+                    width: 155,
+                    alignment: Alignment.center,
                     
-                        const Spacer(flex: 1,),
-
-                     Container(
-                      padding: EdgeInsets.all(10),
-                      alignment: Alignment.centerLeft,
-                          decoration: BoxDecoration(
-                            color: CoreColors.white.withOpacity(0.15),
-                            borderRadius: BorderRadius.all(Radius.circular(100))
+                      decoration: BoxDecoration(
+                        color: CoreColors.gray.withAlpha(40),
+                        borderRadius: BorderRadius.circular(25),
+                      ),
+                    
+                      
+                      child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [ Text(
+                            "Ilość osób "+ "1/"+event.personLimit.toString(),
+                            
+                            style: CoreTheme.baseTextStyle.copyWith(
+                              color: CoreColors.white,
+                              fontSize: 18,
+                            ),
                           ),
-                        ),
-                  ],
-                ),
-              ],
-            ),
+                      ],
+                    ),
+                  ),
+                ],
+              )
+              
+              
+              ),
+            ],
           ),
-          //),
-        ],
-      ),
-      ),
+        ),
+        SizedBox(height: 10,)
+      ],
     );
   }
 }
