@@ -1,0 +1,9 @@
+flask
+bcrypt
+flask-jwt-extended
+flask-login
+sqlalchemy
+flask-sqlalchemy
+flask-cors
+flask-migrate
+pymysql

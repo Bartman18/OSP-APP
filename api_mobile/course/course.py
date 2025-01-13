@@ -20,6 +20,9 @@ def add_course():
     except ValueError:
         return jsonify({"error": "Invalid date format. Use YYYY-MM-DD."}), 400
 
+    if obtained_date >= expiry_date:
+        return jsonify({"error": "Expiry date must be after the obtained date."}), 400
+
     new_course = Courses(
         user_id=user_id,
         course_type=data['course_type'],
@@ -31,7 +34,6 @@ def add_course():
     db.session.commit()
 
     return jsonify({"success": True, "course_id": new_course.course_id}), 201
-
 
 @course_bp.route('/<int:course_id>', methods=['GET'])
 @jwt_required()
@@ -47,7 +49,6 @@ def get_course(course_id):
         "obtained_date": course.obtained_date.strftime('%Y-%m-%d'),
         "expiry_date": course.expiry_date.strftime('%Y-%m-%d')
     })
-
 
 @course_bp.route('/all', methods=['GET'])
 @jwt_required()
@@ -65,7 +66,6 @@ def get_all_courses():
         for course in courses
     ])
 
-
 @course_bp.route('/<int:course_id>', methods=['DELETE'])
 @jwt_required()
 def delete_course(course_id):
@@ -76,37 +76,6 @@ def delete_course(course_id):
         return jsonify({"error": "Course not found or not authorized to delete"}), 404
 
     db.session.delete(course)
-    db.session.commit()
-
-    return jsonify({"success": True}), 200
-
-
-@course_bp.route('/<int:course_id>', methods=['PUT'])
-@jwt_required()
-def update_course(course_id):
-    user_id = get_jwt_identity()
-    course = Courses.query.filter_by(course_id=course_id, user_id=user_id).first()
-
-    if not course:
-        return jsonify({"error": "Course not found or not authorized to edit"}), 404
-
-    data = request.get_json()
-
-    if 'course_type' in data:
-        course.course_type = data['course_type']
-
-    if 'obtained_date' in data:
-        try:
-            course.obtained_date = datetime.strptime(data['obtained_date'], '%Y-%m-%d')
-        except ValueError:
-            return jsonify({"error": "Invalid obtained_date format. Use YYYY-MM-DD."}), 400
-
-    if 'expiry_date' in data:
-        try:
-            course.expiry_date = datetime.strptime(data['expiry_date'], '%Y-%m-%d')
-        except ValueError:
-            return jsonify({"error": "Invalid expiry_date format. Use YYYY-MM-DD."}), 400
-
     db.session.commit()
 
     return jsonify({"success": True}), 200

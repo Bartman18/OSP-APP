@@ -18,7 +18,7 @@ class User(db.Model):
     joined_at = db.Column(db.DateTime, nullable=False)
     admin = db.Column(db.Integer, nullable=False, default=False)
     password_hash = db.Column(db.LargeBinary(60), nullable=False)  # Change to store binary data
-    user_confirmed = db.Column(db.Boolean, nullable=False, default=False)
+    user_confirmed = db.Column(db.Boolean, nullable=False, default=True)
 
     def set_password(self, password):
         # Hash the password using bcrypt
@@ -38,7 +38,7 @@ class Event(db.Model):
     type = db.Column(db.String(80), nullable=False)
     description = db.Column(db.Text, nullable=False)
     person_limit = db.Column(db.Integer, nullable=False)
-    event_confirmed = db.Column(db.Boolean, nullable=False)
+    event_confirmed = db.Column(db.Boolean, nullable=False, default = True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.user_id'), nullable=False)
 
 
@@ -59,4 +59,3 @@ class Courses(db.Model):
     course_type = db.Column(db.String(80), nullable=False)
     obtained_date = db.Column(db.DateTime, nullable=False)
     expiry_date = db.Column(db.DateTime, nullable=False)
-

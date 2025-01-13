@@ -2,9 +2,10 @@ import bcrypt
 from flask import Blueprint, request, jsonify, make_response
 from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity
 from flask_login import login_manager
-
-
+from flask_jwt_extended import set_access_cookies,unset_jwt_cookies
 from models.models import db, User
+from datetime import datetime
+
 
 user_bp = Blueprint('user', __name__)
 
@@ -44,10 +45,11 @@ def register_user():
 
     # Create a new user with hashed password
     new_user = User(
-        first_name=['first_name'],
-        last_name =['last_name'],
+        first_name=data['first_name'],
+        last_name =data['last_name'],
+        joined_at = datetime.now(),
         email=data['email'],
-        phone=['phone'],
+        phone=data['phone'],
         password_hash=hashed_password  # Save hashed password as binary
     )
     db.session.add(new_user)
@@ -62,33 +64,44 @@ from flask_jwt_extended import set_access_cookies
 def login():
     data = request.get_json()
 
-    # Validate input data
+    # Validate input
     if not data or not data.get('email') or not data.get('password'):
         return jsonify({"error": "Invalid input"}), 400
 
-    # Fetch the user from the database
+    # Fetch user
     user = User.query.filter_by(email=data['email']).first()
-
-    # Check if user exists and verify password
     if not user or not user.check_password(data['password']):
-        return jsonify({"error": "Invalid username or password"}), 401
+        return jsonify({"error": "Invalid email or password"}), 401
 
-    # Generate access token
-    access_token = create_access_token(identity=user.id)
+    # Generate JWT access token
+    access_token = create_access_token(identity=str(user.user_id))  # Zamieniamy na string
 
-    # Create a response object
+    # Create response
     response = jsonify({"message": "Login successful"})
-    set_access_cookies(response, access_token)  # Automatyczne ustawienie tokena w ciasteczku
+    set_access_cookies(response, access_token)
 
-    return response
+    return response, 200
+
+@user_bp.route('/logout', methods=['POST'])
+def logout():
+    # Tworzymy odpowiedź
+    response = jsonify({"message": "Logout successful"})
+
+    # Usuwamy ciasteczka JWT
+    unset_jwt_cookies(response)
+
+    return response, 200
+
 
 
 @user_bp.route('/protected', methods=['GET'])
 @jwt_required()
 def protected():
     # Retrieve the identity of the user (usually user ID)
-    current_user_id = get_jwt_identity()
 
+    current_user_id = get_jwt_identity()
+    if not current_user_id:
+        return jsonify({"error": "Unauthorized"}), 401
     # Example response (you can access the database using the user ID)
     return jsonify({
         "message": "You are accessing a protected route!",
@@ -114,3 +127,6 @@ def not_confirmed_user():
         }
         for user in users
     ])
+
+
+
