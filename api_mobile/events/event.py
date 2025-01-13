@@ -175,12 +175,15 @@ def count_users():
 
     # Pobieranie wszystkich udziałów w wydarzeniu
     participations = Participation.query.filter_by(event_id=event_id).all()
+    event = Event.query.filter_by(event_id=event_id).first()
+
 
     # Liczenie osób z potwierdzonym udziałem
     user_saved = sum(1 for participation in participations if participation.status == 'Participation')
 
 
-    return jsonify({"success": user_saved }), 200
+    return jsonify({"user_register": user_saved,
+                    "person_limit" :event.person_limit}), 200
 
 
 

@@ -79,7 +79,7 @@ def create_app():
     # Ładowanie konfiguracji
     from user.config import Config  # Upewnij się, że import działa
     app.config.from_object(Config)
-    print("Loaded Config:", app.config)  # Debug: Wyświetl całą konfigurację
+    # print("Loaded Config:", app.config)  # Debug: Wyświetl całą konfigurację
 
     # Inicjalizacja rozszerzeń
     CORS(app)
