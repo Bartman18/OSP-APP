@@ -1,7 +1,7 @@
 import 'dart:io';
 
-import 'package:fox_core/api/api_response.dart';
-import 'package:fox_core/api/v1/settings.dart';
+import 'package:osp/api/api_response.dart';
+import 'package:osp/api/v1/settings.dart';
 
 class Store {
   String url = '';

@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import 'package:flutter_form_builder/flutter_form_builder.dart';
-import 'package:fox_core/core/appearance.dart';
+import 'package:osp/core/appearance.dart';
 
 /// This class is just a copy-paste from form_builder_date_time_picker
 /// but simplified to provide birthday and zodiac sign selection only.

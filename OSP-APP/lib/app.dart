@@ -1,11 +1,11 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:fox_core/core/appearance.dart';
-import 'package:fox_core/core/helpers.dart';
-import 'package:fox_core/core/no_context_navigation_service.dart';
-import 'package:fox_core/core/routes.dart';
-import 'package:fox_core/core/settings_dict.dart';
+import 'package:osp/core/appearance.dart';
+import 'package:osp/core/helpers.dart';
+import 'package:osp/core/no_context_navigation_service.dart';
+import 'package:osp/core/routes.dart';
+import 'package:osp/core/settings_dict.dart';
 import 'package:get_storage/get_storage.dart';
 
 class DarkFoxCoreApp extends StatelessWidget {

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:fox_core/core/appearance.dart';
+import 'package:osp/core/appearance.dart';
 
 const double defaultInputPadding = 16.0;
 
@@ -17,10 +17,10 @@ InputBorder inputEnabledBorder = const OutlineInputBorder(
 
 InputDecoration customInputDecoration({double paddingValue = defaultInputPadding}) =>
     InputDecoration(
-      fillColor: CoreColors.white,
+      fillColor: Color(0x4b181980),
       filled: true,
       errorBorder: inputEnabledBorder.copyWith(
-          borderSide: const BorderSide(color: Colors.red, style: BorderStyle.solid, width: 2.0)),
+          borderSide: const BorderSide(color: Colors.black, style: BorderStyle.solid, width: 2.0)),
       enabledBorder: inputEnabledBorder,
       focusedBorder: inputEnabledBorder,
       focusedErrorBorder: inputEnabledBorder,

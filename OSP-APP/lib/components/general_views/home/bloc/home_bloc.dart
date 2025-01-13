@@ -3,11 +3,11 @@ import 'dart:developer';
 import 'package:bloc/bloc.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:equatable/equatable.dart';
-import 'package:fox_core/api/api_response.dart';
-import 'package:fox_core/api/v1/bets.dart';
-import 'package:fox_core/components/general_views/home/model/event.dart';
-import 'package:fox_core/core/enums/statuses.dart';
-import 'package:fox_core/core/helpers.dart';
+import 'package:osp/api/api_response.dart';
+import 'package:osp/api/v1/bets.dart';
+import 'package:osp/components/general_views/home/model/event.dart';
+import 'package:osp/core/enums/statuses.dart';
+import 'package:osp/core/helpers.dart';
 
 part 'home_event.dart';
 part 'home_state.dart';

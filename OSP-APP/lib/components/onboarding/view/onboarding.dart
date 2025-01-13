@@ -1,16 +1,16 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:fox_core/components/add_event/add_event.dart';
-import 'package:fox_core/components/onboarding/bloc/onboarding_bloc.dart';
-import 'package:fox_core/components/sign_up/bloc/sign_up_state.dart';
-import 'package:fox_core/components/sign_up/sign_in_or_up_provider.dart';
-import 'package:fox_core/components/sign_up/view/sign_in_or_up.dart';
-import 'package:fox_core/config/onboarding_config.dart';
-import 'package:fox_core/core/appearance.dart';
-import 'package:fox_core/core/routes.dart';
-import 'package:fox_core/widgets/skeleton.dart';
-import 'package:fox_core/core/settings_dict.dart';
+import 'package:osp/components/add_event/add_event.dart';
+import 'package:osp/components/onboarding/bloc/onboarding_bloc.dart';
+import 'package:osp/components/sign_up/bloc/sign_up_state.dart';
+import 'package:osp/components/sign_up/sign_in_or_up_provider.dart';
+import 'package:osp/components/sign_up/view/sign_in_or_up.dart';
+import 'package:osp/config/onboarding_config.dart';
+import 'package:osp/core/appearance.dart';
+import 'package:osp/core/routes.dart';
+import 'package:osp/widgets/skeleton.dart';
+import 'package:osp/core/settings_dict.dart';
 
 import '../../sign_up/view/sign_in_or_up.dart';
 
@@ -229,8 +229,17 @@ class _OnboardingState extends State<Onboarding> {
                                 ),
                               ),
                             ],
-                          ),          
-                      AddEventButton(), 
+                          ),
+                          ElevatedButton(onPressed: () {
+                            showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return AddEventView(); // Otwórz AddEventView jako dialog
+                              },
+                            );
+                          }, 
+                          child: Text("Penis (duży)", style: CoreTheme.baseTextStyle,))          
+                      //const AddEventView(), 
                     ],
                   ),
                 ),

@@ -1,8 +1,8 @@
 import 'dart:convert';
 
-import 'package:fox_core/components/user_profile/models/user_fridge_model.dart';
-import 'package:fox_core/components/user_profile/models/user_score_model.dart';
-import 'package:fox_core/core/settings_dict.dart';
+import 'package:osp/components/user_profile/models/user_fridge_model.dart';
+import 'package:osp/components/user_profile/models/user_score_model.dart';
+import 'package:osp/core/settings_dict.dart';
 
 class AppleIntegration {
   final String id;

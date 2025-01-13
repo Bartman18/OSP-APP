@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:fox_core/components/sign_up/bloc/sign_up_bloc_instance.dart';
-import 'package:fox_core/components/sign_up/bloc/sign_up_state.dart';
-import 'package:fox_core/components/sign_up/view/sign_in_or_up.dart';
+import 'package:osp/components/sign_up/bloc/sign_up_bloc_instance.dart';
+import 'package:osp/components/sign_up/bloc/sign_up_state.dart';
+import 'package:osp/components/sign_up/view/sign_in_or_up.dart';
 
 import 'bloc/sign_up_event.dart';
 

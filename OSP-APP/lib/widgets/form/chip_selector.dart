@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
-import 'package:fox_core/core/appearance.dart';
-import 'package:fox_core/widgets/headers.dart';
+import 'package:osp/core/appearance.dart';
+import 'package:osp/widgets/headers.dart';
 
 class ChipSelectorField<T extends Object> extends FormBuilderFieldDecoration<List<T>> {
   final List<T> options;

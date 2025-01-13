@@ -5,18 +5,18 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "top6-app",
+            "name": "mRemiza-app",
             "request": "launch",
             "type": "dart"
         },
         {
-            "name": "top6-app (profile mode)",
+            "name": "mRemiza-app (profile mode)",
             "request": "launch",
             "type": "dart",
             "flutterMode": "profile"
         },
         {
-            "name": "top6-app (release mode)",
+            "name": "mRemiza-app (release mode)",
             "request": "launch",
             "type": "dart",
             "flutterMode": "release"

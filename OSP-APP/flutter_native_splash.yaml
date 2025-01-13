@@ -2,9 +2,9 @@ flutter_native_splash:
   background_image: assets/splash/background.png
 
   android_12:
-    color: "#000000"
-    image: assets/splash/top6.png
-    icon_background_color: "#000000"
+    color: "#AC1613"
+    image: assets/splash/mRemiza.png
+    icon_background_color: "#AC1613"
 
   android: true
   ios: true

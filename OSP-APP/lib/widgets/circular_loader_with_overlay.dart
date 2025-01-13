@@ -1,7 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:fox_core/widgets/circular_loader.dart';
+import 'package:osp/widgets/circular_loader.dart';
 
 class CircularLoaderWithOverlay extends StatelessWidget {
   final Widget? child;

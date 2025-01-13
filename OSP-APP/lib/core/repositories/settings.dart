@@ -1,4 +1,4 @@
-import 'package:fox_core/components/settings/models/settings_model.dart';
+import 'package:osp/components/settings/models/settings_model.dart';
 
 class SettingsRepository {
   PublicSettings public = PublicSettings();

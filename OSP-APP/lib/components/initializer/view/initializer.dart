@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:fox_core/components/initializer/bloc/initializer_bloc.dart';
-import 'package:fox_core/core/routes.dart';
-import 'package:fox_core/widgets/fullscreen_loader.dart';
+import 'package:osp/components/initializer/bloc/initializer_bloc.dart';
+import 'package:osp/core/routes.dart';
+import 'package:osp/widgets/fullscreen_loader.dart';
 
 class Initializer extends StatefulWidget {
   const Initializer({super.key});

@@ -5,12 +5,12 @@ import 'dart:ui';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:fox_core/core/appearance.dart';
+import 'package:osp/core/appearance.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:fox_core/core/routes.dart';
-import 'package:fox_core/widgets/buttons.dart';
+import 'package:osp/core/routes.dart';
+import 'package:osp/widgets/buttons.dart';
 import 'package:transparent_image/transparent_image.dart';
-import 'package:fox_core/core/helpers.dart';
+import 'package:osp/core/helpers.dart';
 
 class AdCard extends StatelessWidget {
   final String title;

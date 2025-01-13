@@ -1,7 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:fox_core/core/appearance.dart';
+import 'package:osp/core/appearance.dart';
 
 class AppElevatedButton extends StatelessWidget {
   final String buttonText;

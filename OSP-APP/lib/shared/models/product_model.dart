@@ -1,4 +1,4 @@
-import 'package:fox_core/shared/product_expiration_enum.dart';
+import 'package:osp/shared/product_expiration_enum.dart';
 
 class ProductModel {
   final int id;

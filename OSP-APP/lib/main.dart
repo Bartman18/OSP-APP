@@ -1,10 +1,10 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:fox_core/app.dart';
-import 'package:fox_core/core/repositories/settings.dart';
-import 'package:fox_core/core/repositories/user.dart';
-import 'package:fox_core/observer.dart';
+import 'package:osp/app.dart';
+import 'package:osp/core/repositories/settings.dart';
+import 'package:osp/core/repositories/user.dart';
+import 'package:osp/observer.dart';
 import 'package:get_it/get_it.dart';
 import 'package:get_storage/get_storage.dart';
 

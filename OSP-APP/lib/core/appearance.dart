@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:fox_core/widgets/circular_loader_with_overlay.dart';
+import 'package:osp/widgets/circular_loader_with_overlay.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 
 class CoreColors {

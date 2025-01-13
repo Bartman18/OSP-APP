@@ -3,7 +3,7 @@
 ---------------------
 
 ## To do at the beginning
-1. Localize `pl.darkfox.fox_core` for Android and `pl.darkfox.foxCore` for iOS.
+1. Localize `pl.darkfox.osp` for Android and `pl.darkfox.foxCore` for iOS.
 2. Replace these with valid names.
 
 ## How to? Translate

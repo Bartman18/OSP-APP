@@ -1,9 +1,9 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:fox_core/components/add_event/add_event.dart';
-import 'package:fox_core/core/appearance.dart';
-import 'package:fox_core/core/routes.dart';
+import 'package:osp/components/add_event/add_event.dart';
+import 'package:osp/core/appearance.dart';
+import 'package:osp/core/routes.dart';
 
 enum BottomBarTab { none, home, calendar, myEvents, onboarding }
 

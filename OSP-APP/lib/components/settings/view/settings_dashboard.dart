@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:fox_core/components/settings/bloc/settings_bloc.dart';
-import 'package:fox_core/components/settings/view/connected_accounts.dart';
-import 'package:fox_core/components/settings/view/menu.dart';
-import 'package:fox_core/core/enums/statuses.dart';
-import 'package:fox_core/core/routes.dart';
-import 'package:fox_core/widgets/skeleton.dart';
+import 'package:osp/components/settings/bloc/settings_bloc.dart';
+import 'package:osp/components/settings/view/connected_accounts.dart';
+import 'package:osp/components/settings/view/menu.dart';
+import 'package:osp/core/enums/statuses.dart';
+import 'package:osp/core/routes.dart';
+import 'package:osp/widgets/skeleton.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 
 class SettingsDashboard extends StatefulWidget {
