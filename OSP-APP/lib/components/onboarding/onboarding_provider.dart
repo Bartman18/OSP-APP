@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:fox_core/components/onboarding/bloc/onboarding_bloc.dart';
-import 'package:fox_core/components/onboarding/view/onboarding.dart';
+import 'package:osp/components/onboarding/bloc/onboarding_bloc.dart';
+import 'package:osp/components/onboarding/view/onboarding.dart';
 
 class OnboardingProvider extends StatelessWidget {
   const OnboardingProvider({super.key});

@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:fox_core/components/sign_up/bloc/sign_up_state.dart';
+import 'package:osp/components/sign_up/bloc/sign_up_state.dart';
 
 sealed class SignInOrUpEvent extends Equatable {
   const SignInOrUpEvent();

@@ -1,6 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:fox_core/core/appearance.dart';
+import 'package:osp/core/appearance.dart';
 
 /// Widget to show in case we want to display centered progress indicator while loading's in progress.
 class FullscreenNotice extends StatelessWidget {

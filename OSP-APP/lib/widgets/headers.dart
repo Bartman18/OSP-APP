@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:fox_core/core/appearance.dart';
+import 'package:osp/core/appearance.dart';
 
 class AppHeaderHint extends StatelessWidget {
   final String text;

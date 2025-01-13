@@ -6,3 +6,9 @@ sealed class AddEventEvent extends Equatable {
   @override
   List<Object> get props => [];
 }
+
+class MaybeSaveData extends AddEventEvent {
+  final AddEventModel addEvent;
+
+  const MaybeSaveData({required this.addEvent});
+}

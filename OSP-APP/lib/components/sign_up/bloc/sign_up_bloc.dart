@@ -1,16 +1,16 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:fox_core/api/api_response.dart';
-import 'package:fox_core/api/v1/app_sign_up.dart';
-import 'package:fox_core/api/v1/user.dart';
-import 'package:fox_core/components/sign_up/bloc/sign_up_event.dart';
-import 'package:fox_core/components/sign_up/bloc/sign_up_state.dart';
-import 'package:fox_core/components/sign_up/models/sign_up_register.dart';
-import 'package:fox_core/core/enums/statuses.dart';
-import 'package:fox_core/core/helpers.dart';
-import 'package:fox_core/core/repositories/settings.dart';
-import 'package:fox_core/core/repositories/user.dart';
-import 'package:fox_core/core/settings_dict.dart';
+import 'package:osp/api/api_response.dart';
+import 'package:osp/api/v1/app_sign_up.dart';
+import 'package:osp/api/v1/user.dart';
+import 'package:osp/components/sign_up/bloc/sign_up_event.dart';
+import 'package:osp/components/sign_up/bloc/sign_up_state.dart';
+import 'package:osp/components/sign_up/models/sign_up_register.dart';
+import 'package:osp/core/enums/statuses.dart';
+import 'package:osp/core/helpers.dart';
+import 'package:osp/core/repositories/settings.dart';
+import 'package:osp/core/repositories/user.dart';
+import 'package:osp/core/settings_dict.dart';
 import 'package:get_it/get_it.dart';
 import 'package:get_storage/get_storage.dart';
 

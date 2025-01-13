@@ -1,11 +1,11 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:fox_core/api/api_response.dart';
-import 'package:fox_core/api/v1/user.dart';
-import 'package:fox_core/core/enums/statuses.dart';
-import 'package:fox_core/core/helpers.dart';
-import 'package:fox_core/core/repositories/user.dart';
-import 'package:fox_core/core/settings_dict.dart';
+import 'package:osp/api/api_response.dart';
+import 'package:osp/api/v1/user.dart';
+import 'package:osp/core/enums/statuses.dart';
+import 'package:osp/core/helpers.dart';
+import 'package:osp/core/repositories/user.dart';
+import 'package:osp/core/settings_dict.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:get_it/get_it.dart';
 

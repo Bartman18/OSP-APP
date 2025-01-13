@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:fox_core/widgets/bottom_navigation/bottom_bar.dart';
-import 'package:fox_core/widgets/skeleton.dart';
+import 'package:osp/widgets/bottom_navigation/bottom_bar.dart';
+import 'package:osp/widgets/skeleton.dart';
 
 class DashboardView extends StatefulWidget {
   final Widget child;

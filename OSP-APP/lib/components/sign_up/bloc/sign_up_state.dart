@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:fox_core/core/enums/statuses.dart';
+import 'package:osp/core/enums/statuses.dart';
 
 enum SignInOrUpContext { signIn, signUp }
 

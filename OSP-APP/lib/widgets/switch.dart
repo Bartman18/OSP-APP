@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:fox_core/core/appearance.dart';
+import 'package:osp/core/appearance.dart';
 
 class AppSwitch extends StatefulWidget {
   final bool value;

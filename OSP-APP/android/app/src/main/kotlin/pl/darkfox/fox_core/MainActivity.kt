@@ -1,4 +1,4 @@
-package eu.byfox.top6
+package eu.byfox.mRemiza
 
 import io.flutter.embedding.android.FlutterActivity
 

@@ -1,4 +1,4 @@
-import 'package:fox_core/components/sign_up/models/email_verification_type.dart';
+import 'package:osp/components/sign_up/models/email_verification_type.dart';
 
 class EmailVerificationArguments {
   final EmailVerificationType emailVerificationType;

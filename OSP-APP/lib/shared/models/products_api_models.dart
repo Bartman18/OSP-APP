@@ -1,4 +1,4 @@
-import 'package:fox_core/shared/models/product_model.dart';
+import 'package:osp/shared/models/product_model.dart';
 
 class AddProductModel {
   String name;

@@ -2,9 +2,9 @@ import 'dart:io';
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:fox_core/core/appearance.dart';
-import 'package:fox_core/core/helpers.dart';
-import 'package:fox_core/widgets/buttons.dart';
+import 'package:osp/core/appearance.dart';
+import 'package:osp/core/helpers.dart';
+import 'package:osp/widgets/buttons.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:flutter_svg/flutter_svg.dart';

@@ -1,5 +1,5 @@
-import 'package:fox_core/api/api_request.dart';
-import 'package:fox_core/api/api_response.dart';
+import 'package:osp/api/api_request.dart';
+import 'package:osp/api/api_response.dart';
 import 'package:http/http.dart';
 import 'dart:convert';
 

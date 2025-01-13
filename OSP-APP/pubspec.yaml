@@ -1,4 +1,4 @@
-name: fox_core
+name: osp
 description: "Qui hic minxerit aut cacaverit, habeat deos superos et inferos iratos!"
 publish_to: 'none'
 
@@ -65,9 +65,5 @@ flutter:
     - config/onboarding.json
     - assets/licenses/
     - assets/translations/
-    - assets/onboarding/
     - assets/icons/
-    - assets/signUp/
     - assets/splash/
-    - assets/subscription/
-    - assets/placeholder/

@@ -1,7 +1,7 @@
 import 'dart:ffi';
 
 import 'package:easy_localization/easy_localization.dart';
-import 'package:fox_core/core/translatable.dart';
+import 'package:osp/core/translatable.dart';
 
 class EventModel {
   final int id;

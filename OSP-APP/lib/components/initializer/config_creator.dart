@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/services.dart';
-import 'package:fox_core/config/urls_config.dart';
+import 'package:osp/config/urls_config.dart';
 
 class ConfigCreator {
   Map<String, dynamic> _urls = {};

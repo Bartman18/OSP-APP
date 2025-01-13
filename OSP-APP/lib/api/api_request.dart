@@ -1,9 +1,9 @@
 import 'dart:convert';
 import 'dart:developer';
 
-import 'package:fox_core/api/api_response.dart';
-import 'package:fox_core/config/urls_config.dart';
-import 'package:fox_core/core/settings_dict.dart';
+import 'package:osp/api/api_response.dart';
+import 'package:osp/config/urls_config.dart';
+import 'package:osp/core/settings_dict.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart';
 

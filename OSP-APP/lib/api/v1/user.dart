@@ -1,8 +1,8 @@
 import 'dart:convert';
 
-import 'package:fox_core/api/api_request.dart';
-import 'package:fox_core/api/api_response.dart';
-import 'package:fox_core/components/user_profile/models/user_profile.dart';
+import 'package:osp/api/api_request.dart';
+import 'package:osp/api/api_response.dart';
+import 'package:osp/components/user_profile/models/user_profile.dart';
 import 'package:http/http.dart';
 import 'package:uuid/uuid.dart';
 
