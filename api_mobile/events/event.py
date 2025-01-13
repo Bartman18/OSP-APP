@@ -207,3 +207,18 @@ def event_date():
         }
         for event in events
     ])
+
+
+
+@event_bp.route('/count_participations', methods=['GET'])
+@jwt_required()
+def count_participations():
+    user_id = get_jwt_identity()
+
+    # Pobieramy wszystkie uczestnictwa użytkownika
+    participations = Participation.query.filter_by(user_id=user_id).all()
+
+    # Liczymy tylko te, które mają status 'Participation'
+    participation_count = sum(1 for p in participations if p.status == 'Participation')
+
+    return jsonify({'participations': participation_count}), 200

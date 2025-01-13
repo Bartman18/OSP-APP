@@ -103,6 +103,10 @@ def create_app():
     app.register_blueprint(event_bp, url_prefix='/api/event')
     app.register_blueprint(course_bp, url_prefix='/api/course')
 
+    @app.route('/api/', methods=['GET'])
+    def api_health():
+        return jsonify({"message": "API is running!", "status": "success"}), 200
+
     return app
 
 if __name__ == '__main__':
