@@ -58,7 +58,7 @@ def register_user():
     return jsonify({"message": "User registered successfully!"}), 201
 
 
-from flask_jwt_extended import set_access_cookies
+
 
 @user_bp.route('/login', methods=['POST'])
 def login():
@@ -129,4 +129,52 @@ def not_confirmed_user():
     ])
 
 
+@user_bp.route('/edit_user', methods=['PUT'])
+@jwt_required()  # Używamy dekoratora do weryfikacji tokena JWT
+def edit_user():
+    # Pobierz dane z zapytania
+    data = request.get_json()
 
+
+    if not data:
+        return jsonify({"error": "Invalid input"}), 400
+
+
+    user_id = get_jwt_identity()
+
+
+    user = User.query.get(user_id)
+    if not user:
+        return jsonify({"error": "User not found"}), 404
+
+
+    if 'email' in data:
+        if not isinstance(data['email'], str) or '@' not in data['email']:
+            return jsonify({"error": "Invalid email format"}), 400
+        user.email = data['email']
+
+    if 'first_name' in data:
+        if not isinstance(data['first_name'], str) or len(data['first_name']) < 2:
+            return jsonify({"error": "Invalid first name format"}), 400
+        user.first_name = data['first_name']
+
+    if 'last_name' in data:
+        if not isinstance(data['last_name'], str) or len(data['last_name']) < 2:
+            return jsonify({"error": "Invalid last name format"}), 400
+        user.last_name = data['last_name']
+
+    if 'phone' in data:
+        if not isinstance(data['phone'], (int, str)) or len(str(data['phone'])) != 11:
+            return jsonify({"error": "Invalid phone format"}), 400
+        user.phone = data['phone']
+
+
+
+
+    try:
+        db.session.commit()
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({"error": "Failed to update user data", "details": str(e)}), 500
+
+    return jsonify({"message": "User data updated successfully"}), 200
