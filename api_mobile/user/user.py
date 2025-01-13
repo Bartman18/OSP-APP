@@ -60,6 +60,7 @@ def register_user():
 
 
 
+
 @user_bp.route('/login', methods=['POST'])
 def login():
     data = request.get_json()
@@ -68,10 +69,20 @@ def login():
     if not data or not data.get('email') or not data.get('password'):
         return jsonify({"error": "Invalid input"}), 400
 
-    # Fetch user
-    user = User.query.filter_by(email=data['email']).first()
+    # Check if input is email or phone
+    user = None
+    if '@' in data['email']:
+        user = User.query.filter_by(email=data['email']).first()
+    else:
+        try:
+            phone_number = int(data['email'])
+            user = User.query.filter_by(phone=phone_number).first()
+        except ValueError:
+            return jsonify({"error": "Invalid email or phone format"}), 400
+
+    # Validate user and password
     if not user or not user.check_password(data['password']):
-        return jsonify({"error": "Invalid email or password"}), 401
+        return jsonify({"error": "Invalid email/phone or password"}), 401
 
     # Generate JWT access token
     access_token = create_access_token(identity=str(user.user_id))  # Zamieniamy na string
