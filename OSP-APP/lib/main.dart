@@ -2,7 +2,6 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:osp/app.dart';
-import 'package:osp/core/repositories/settings.dart';
 import 'package:osp/core/repositories/user.dart';
 import 'package:osp/observer.dart';
 import 'package:get_it/get_it.dart';
@@ -16,7 +15,6 @@ void main() async {
   EasyLocalization.logger.enableBuildModes = [];
 
   GetIt.instance.registerLazySingleton<UserRepository>(() => UserRepository());
-  GetIt.instance.registerLazySingleton<SettingsRepository>(() => SettingsRepository());
 
   Bloc.observer = const AppObserver();
   runApp(EasyLocalization(

@@ -17,7 +17,7 @@ class User(db.Model):
     phone = db.Column(db.Numeric(11), unique=True, nullable=False)
     joined_at = db.Column(db.DateTime, nullable=False)
     admin = db.Column(db.Integer, nullable=False, default=False)
-    password_hash = db.Column(db.LargeBinary(60), nullable=False)  # Change to store binary data
+    password_hash = db.Column(db.String(255), nullable=False)  # Change to store binary data
     user_confirmed = db.Column(db.Boolean, nullable=False, default=True)
 
     def set_password(self, password):

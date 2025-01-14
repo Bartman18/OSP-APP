@@ -17,7 +17,7 @@ InputBorder inputEnabledBorder = const OutlineInputBorder(
 
 InputDecoration customInputDecoration({double paddingValue = defaultInputPadding}) =>
     InputDecoration(
-      fillColor: Color(0x4b181980),
+      fillColor: Colors.black.withOpacity(0.8),
       filled: true,
       errorBorder: inputEnabledBorder.copyWith(
           borderSide: const BorderSide(color: Colors.black, style: BorderStyle.solid, width: 2.0)),

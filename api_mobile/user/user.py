@@ -22,40 +22,62 @@ def get_user(user_id):
         return jsonify({"error": "User not found"}), 404
 
     return jsonify({
-        "id": user.id,
-        "username": user.username,
+        "id": user.user_id,
+        "first_name": user.first_name,
         "email": user.email,
-        "password_hash": user.password_hash
+
     })
 
 
 @user_bp.route('/register', methods=['POST'])
 def register_user():
-    data = request.get_json()
+    try:
+        # Pobranie danych z żądania
+        data = request.get_json()
 
-    if not data or not data.get('email') or not data.get('password') or not data.get('email'):
-        return jsonify({"error": "Invalid input"}), 400
+        if not data:
+            return jsonify({"error": "Invalid input or unsupported media type"}), 400
 
-    if User.query.filter_by(email=data['email']).first() or User.query.filter_by(phone=data['phone']).first():
-        return jsonify({"error": "User already exists"}), 400
+        # Walidacja danych
+        if not data.get('email') or not data.get('password'):
+            return jsonify({"error": "Missing required fields"}), 400
 
-    # Hash the password using bcrypt
-    salt = bcrypt.gensalt()
-    hashed_password = bcrypt.hashpw(data['password'].encode('utf-8'), salt)
+        # Sprawdzenie, czy użytkownik już istnieje
+        if User.query.filter_by(email=data['email']).first():
+            return jsonify({"error": "User with this email already exists"}), 400
+        if User.query.filter_by(phone=data['phone']).first():
+            return jsonify({"error": "User with this phone already exists"}), 400
 
-    # Create a new user with hashed password
-    new_user = User(
-        first_name=data['first_name'],
-        last_name =data['last_name'],
-        joined_at = datetime.now(),
-        email=data['email'],
-        phone=data['phone'],
-        password_hash=hashed_password  # Save hashed password as binary
-    )
-    db.session.add(new_user)
-    db.session.commit()
+        # Hashowanie hasła
+        salt = bcrypt.gensalt()
+        hashed_password = bcrypt.hashpw(data['password'].encode('utf-8'), salt)
 
-    return jsonify({"message": "User registered successfully!"}), 201
+        # Utworzenie nowego użytkownika
+        new_user = User(
+            first_name=data['first_name'],
+            last_name=data['last_name'],
+            joined_at=datetime.now(),
+            email=data['email'],
+            phone=data['phone'],
+            password_hash=hashed_password.decode('utf-8')
+        )
+
+        db.session.add(new_user)
+        db.session.commit()
+
+        response_body = {
+            "message": "User registered successfully!",
+
+        }
+        return jsonify(response_body), 200
+
+    except Exception as e:
+        print(f"Error occurred: {str(e)}")
+        response_body = {
+            "error": "An unexpected error occurred",
+            "details": str(e)
+        }
+        return jsonify(response_body), 500
 
 
 

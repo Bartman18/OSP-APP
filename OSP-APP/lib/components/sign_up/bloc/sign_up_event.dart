@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:osp/components/sign_up/bloc/sign_up_state.dart';
+import 'package:osp/components/sign_up/models/sign_up_register.dart';
 
 sealed class SignInOrUpEvent extends Equatable {
   const SignInOrUpEvent();
@@ -52,12 +53,14 @@ final class SetContext extends SignInOrUpEvent {
 }
 
 class SaveEmailAndPassword extends SignInOrUpEvent {
+  final String name;
+  final String lastName;
   final String email;
+  final String phone;
   final String password;
-  const SaveEmailAndPassword(this.email, this.password);
-
+  const SaveEmailAndPassword(this.name, this.lastName, this.email, this.phone, this.password);
   @override
-  List<Object?> get props => [email, password];
+  List<Object?> get props => [name, lastName, email, phone, password];
 }
 
 final class SignInWithCredentials extends SignInOrUpEvent {

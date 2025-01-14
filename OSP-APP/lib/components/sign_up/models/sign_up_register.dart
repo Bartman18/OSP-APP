@@ -1,23 +1,27 @@
 import 'package:uuid/uuid.dart';
 
 class SignUpRegisterModel {
-  String? name;
+  String name;
+  String lastName;
   String email;
+  String phone;
   String password;
-  String passwordConfirmation;
 
   SignUpRegisterModel({
+    this.name = '',
+    this.lastName = '',
     this.email = '',
+    this.phone = '',
     this.password = '',
-    this.passwordConfirmation = '',
-  }) : name = const Uuid().v4();
+  });
 
   Map<String, dynamic> toJSON() {
     return {
-      'name': name,
+      'first_name': name,
+      'last_name': lastName,
       'email': email,
+      'phone': phone,
       'password': password,
-      'password_confirmation': passwordConfirmation
     };
   }
 }

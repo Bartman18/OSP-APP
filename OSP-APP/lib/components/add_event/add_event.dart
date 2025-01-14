@@ -12,7 +12,6 @@ import 'package:osp/components/add_event/bloc/add_event_bloc.dart';
 import 'package:osp/core/appearance.dart';
 import 'package:osp/core/enums/statuses.dart';
 import 'package:osp/core/helpers.dart';
-import 'package:osp/core/repositories/settings.dart';
 import 'package:osp/core/repositories/user.dart';
 import 'package:osp/core/routes.dart';
 import 'package:osp/shared/custom_input_decoration.dart';

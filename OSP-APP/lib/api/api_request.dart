@@ -9,7 +9,6 @@ import 'package:http/http.dart';
 
 class ApiRequest {
   final String v1 = URLSConfig.api;
-  final String web = URLSConfig.web;
 
   static String statusKey = 'status';
   static String dataKey = 'data';
@@ -30,7 +29,8 @@ class ApiRequest {
 
   Future<Map<String, String>> getHeaders({bool json = false}) async {
     String token = GetStorage().read(SettingsDictionary.userToken) ?? '-1';
-    Map<String, String> headers = {'Authorization': 'Bearer $token', 'Accept': 'application/json'};
+    Map<String, String> headers = {'Content-Type': 'application/json', // Kluczowe!
+    'Accept': 'application/json',};
 
     if (json) {
       headers.putIfAbsent('Content-Type', () => 'application/json');
@@ -40,8 +40,9 @@ class ApiRequest {
   }
 
   ApiResponse handleResponse(Response response) {
+    log(response.body);
     Map<String, dynamic> body = jsonDecode(response.body);
-
+    log(body.toString());
     if (200 != response.statusCode) {
       String message = body['message'] ?? 'unknown error';
       int errorCode = body['code'] ?? 0;
