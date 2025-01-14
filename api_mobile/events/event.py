@@ -220,5 +220,30 @@ def count_participations():
 
     # Liczymy tylko te, które mają status 'Participation'
     participation_count = sum(1 for p in participations if p.status == 'Participation')
+    cancel_participation = sum(1 for p in participations if p.status == 'cancelled')
 
-    return jsonify({'participations': participation_count}), 200
+    return jsonify({'participations': participation_count ,'cancelled': cancel_participation}), 200
+
+@event_bp.route('/resereve_group', methods=['GET'])
+def resereve_group():
+    data = request.get_json()
+    if not data or not data.get('event_id'):
+        return jsonify({"error": "event_id is required"}), 400
+
+    event_id = data['event_id']
+    participations = Participation.query.filter_by(event_id=event_id, status='reserve').all()
+
+    if not participations:
+        return jsonify({"error": "No reserved participations found for this event."}), 404
+
+    response = [
+        {
+            'user_id': participation.user_id,
+            'status': participation.status,
+            'signed_data': participation.signed_data,
+            'event_id': event_id,  # Corrected spelling
+        }
+        for participation in participations
+    ]
+
+    return jsonify(response), 200
