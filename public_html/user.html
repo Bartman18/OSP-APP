@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>mRemiza - Dane użytkownika</title>
+    <style>
+         body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+        }
+        .navbar {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .navbar h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+        .navbar .menu {
+            display: flex;
+            gap: 15px;
+        }
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            cursor: pointer;
+        }
+        .navbar .logout {
+            background-color: #dc3545;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .container {
+            padding: 20px;
+            max-width: 1200px;
+            margin: 20px auto;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .container h2 {
+            margin-top: 0;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .form-group button {
+            padding: 10px 20px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .form-group button:hover {
+            background-color: #218838;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        li button {
+            margin-left: 10px;
+            padding: 5px 10px;
+            font-size: 14px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+        }
+        .edit-btn {
+            background-color: #ffc107;
+            color: black;
+        }
+        .delete-btn {
+            background-color: #dc3545;
+            color: white;
+        }
+        footer {
+            background-color: #343a40;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <h1>mRemiza</h1>
+        <div class="menu">
+            <a href="index.html">Wszystkie wydarzenia</a>
+            <a href="yours.html">Twoje wydarzenia</a>
+            <a href="user.html">Dane</a>
+        </div>
+        <button class="logout" onclick="logout()">Wyloguj</button>
+    </div>
+
+    <div class="container">
+        <h2>Dane użytkownika</h2>
+        <form id="userForm">
+            <div class="form-group">
+                <label for="first_name">Imię:</label>
+                <input type="text" id="first_name" name="first_name" required>
+            </div>
+            <div class="form-group">
+                <label for="last_name">Nazwisko:</label>
+                <input type="text" id="last_name" name="last_name" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="phone">Numer telefonu:</label>
+                <input type="text" id="phone" name="phone">
+            </div>
+            <div class="form-group">
+                <button type="button" onclick="updateUserData()">Zapisz zmiany</button>
+            </div>
+        </form>
+
+        <h2>Dodawanie Kursu</h2>
+        <form id="courseForm">
+            <div class="form-group">
+                <label for="course_type">Typ Kursu:</label>
+                <input type="text" id="course_type" placeholder="Wprowadź typ kursu" required>
+            </div>
+            <div class="form-group">
+                <label for="obtained_date">Data Ukończenia:</label>
+                <input type="date" id="obtained_date" required>
+            </div>
+            <div class="form-group">
+                <label for="expiry_date">Data Ważności:</label>
+                <input type="date" id="expiry_date">
+            </div>
+            <div class="form-group">
+                <button type="button" onclick="addCourse()">Dodaj Kurs</button>
+            </div>
+        </form>
+
+        <h2>Twoje Kursy</h2>
+        <ul id="courseList"></ul>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 mRemiza - Wszystkie prawa zastrzeżone</p>
+    </footer>
+
+    <script>
+        const userId = sessionStorage.getItem('user_id');
+
+        async function loadUserData() {
+            if (!userId) {
+                alert('Brak zalogowanego użytkownika. Zaloguj się ponownie.');
+                window.location.href = 'login.html';
+                return;
+            }
+
+            try {
+                const response = await fetch(`https://mremiza.ospklobuck.pl/api/user_data.php?user_id=${userId}`);
+                const data = await response.json();
+
+                if (data.success) {
+                    document.getElementById('first_name').value = data.user.first_name;
+                    document.getElementById('last_name').value = data.user.last_name;
+                    document.getElementById('email').value = data.user.email;
+                    document.getElementById('phone').value = data.user.phone || '';
+
+                    const courseList = document.getElementById('courseList');
+                    courseList.innerHTML = data.courses.length
+                        ? data.courses.map(course => `
+                            <li>
+                                <span>${course.course_type} - Ukończono: ${course.obtained_date}, Ważność: ${course.expiry_date || 'Brak'}</span>
+                                <button class="edit-btn" onclick="editCourse(${course.course_id}, '${course.course_type}', '${course.obtained_date}', '${course.expiry_date}')">Edytuj</button>
+                                <button class="delete-btn" onclick="deleteCourse(${course.course_id})">Usuń</button>
+                            </li>`).join('')
+                        : '<li>Brak ukończonych kursów</li>';
+                } else {
+                    alert(data.error);
+                }
+            } catch (error) {
+                console.error('Błąd ładowania danych:', error);
+            }
+        }
+
+        async function updateUserData() {
+            try {
+                const firstName = document.getElementById('first_name').value;
+                const lastName = document.getElementById('last_name').value;
+                const email = document.getElementById('email').value;
+                const phone = document.getElementById('phone').value;
+
+                const response = await fetch('https://mremiza.ospklobuck.pl/api/update_user.php', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ user_id: userId, first_name: firstName, last_name: lastName, email, phone, action: 'edit_user' }),
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    alert('Dane zostały zaktualizowane.');
+                } else {
+                    alert(result.error);
+                }
+            } catch (error) {
+                console.error('Błąd podczas aktualizacji danych użytkownika:', error);
+            }
+        }
+
+        async function addCourse() {
+            const courseType = document.getElementById('course_type').value;
+            const obtainedDate = document.getElementById('obtained_date').value;
+            const expiryDate = document.getElementById('expiry_date').value;
+
+            try {
+                const response = await fetch('https://mremiza.ospklobuck.pl/api/update_user.php', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ user_id: userId, action: 'add_course', course_type: courseType, obtained_date: obtainedDate, expiry_date: expiryDate }),
+                });
+                const result = await response.json();
+
+                if (result.success) {
+                    alert('Kurs został dodany.');
+                    loadUserData();
+                } else {
+                    alert(result.error);
+                }
+            } catch (error) {
+                console.error('Błąd podczas dodawania kursu:', error);
+            }
+        }
+
+        async function editCourse(courseId, courseType, obtainedDate, expiryDate) {
+            const newCourseType = prompt('Edytuj typ kursu:', courseType);
+            const newObtainedDate = prompt('Edytuj datę ukończenia:', obtainedDate);
+            const newExpiryDate = prompt('Edytuj datę ważności:', expiryDate || '');
+
+            if (!newCourseType || !newObtainedDate) return;
+
+            try {
+                const response = await fetch('https://mremiza.ospklobuck.pl/api/update_user.php', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        user_id: userId,
+                        action: 'edit_course',
+                        course_id: courseId,
+                        course_type: newCourseType,
+                        obtained_date: newObtainedDate,
+                        expiry_date: newExpiryDate
+                    }),
+                });
+                const result = await response.json();
+
+                if (result.success) {
+                    alert('Kurs został zaktualizowany.');
+                    loadUserData();
+                } else {
+                    alert(result.error);
+                }
+            } catch (error) {
+                console.error('Błąd podczas edycji kursu:', error);
+            }
+        }
+
+        async function deleteCourse(courseId) {
+            if (confirm('Czy na pewno chcesz usunąć ten kurs?')) {
+                try {
+                    const response = await fetch('https://mremiza.ospklobuck.pl/api/update_user.php', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ user_id: userId, action: 'delete_course', course_id: courseId }),
+                    });
+                    const result = await response.json();
+
+                    if (result.success) {
+                        alert('Kurs został usunięty.');
+                        loadUserData();
+                    } else {
+                        alert(result.error);
+                    }
+                } catch (error) {
+                    console.error('Błąd podczas usuwania kursu:', error);
+                }
+            }
+        }
+
+        function logout() {
+            sessionStorage.clear();
+            alert('Wylogowano użytkownika.');
+            window.location.href = 'login.html';
+        }
+
+        loadUserData();
+    </script>
+</body>
+</html>

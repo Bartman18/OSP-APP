@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>mRemiza - Logowanie i Rejestracja</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+        }
+        .container {
+            max-width: 400px;
+            margin: 50px auto;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            text-align: center;
+        }
+        h1 {
+            font-size: 24px;
+            color: #007bff;
+            margin-bottom: 20px;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        button {
+            padding: 10px 15px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        #message {
+            margin-top: 15px;
+            color: red;
+            font-size: 14px;
+        }
+        .toggle {
+            cursor: pointer;
+            color: #007bff;
+            font-size: 14px;
+            text-decoration: underline;
+        }
+        footer {
+            margin-top: 20px;
+            text-align: center;
+            color: #6c757d;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 id="formTitle">Logowanie</h1>
+        <form id="authForm">
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" placeholder="Wprowadź email" required>
+
+            <label for="password">Hasło:</label>
+            <input type="password" id="password" name="password" placeholder="Wprowadź hasło" required>
+
+            <div id="registrationFields" style="display: none;">
+                <label for="confirmPassword">Potwierdź Hasło:</label>
+                <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Potwierdź hasło">
+
+                <label for="firstName">Imię:</label>
+                <input type="text" id="firstName" name="firstName" placeholder="Wprowadź imię">
+
+                <label for="lastName">Nazwisko:</label>
+                <input type="text" id="lastName" name="lastName" placeholder="Wprowadź nazwisko">
+
+                <label for="phone">Numer telefonu:</label>
+                <input type="text" id="phone" name="phone" placeholder="Wprowadź numer telefonu">
+            </div>
+
+            <button type="submit">Zaloguj</button>
+        </form>
+        <p id="message"></p>
+        <p class="toggle" onclick="toggleForm()">Nie masz konta? Zarejestruj się</p>
+    </div>
+    <footer>
+        <p>&copy; 2025 mRemiza - Wszystkie prawa zastrzeżone</p>
+    </footer>
+
+    <script>
+        let isRegistering = false;
+
+        function toggleForm() {
+            isRegistering = !isRegistering;
+            const formTitle = document.getElementById('formTitle');
+            const registrationFields = document.getElementById('registrationFields');
+            const submitButton = document.querySelector('#authForm button');
+            const toggleText = document.querySelector('.toggle');
+
+            if (isRegistering) {
+                formTitle.textContent = 'Rejestracja';
+                registrationFields.style.display = 'block';
+                submitButton.textContent = 'Zarejestruj';
+                toggleText.textContent = 'Masz już konto? Zaloguj się';
+            } else {
+                formTitle.textContent = 'Logowanie';
+                registrationFields.style.display = 'none';
+                submitButton.textContent = 'Zaloguj';
+                toggleText.textContent = 'Nie masz konta? Zarejestruj się';
+            }
+        }
+
+       document.getElementById('authForm').addEventListener('submit', async function (e) {
+    e.preventDefault();
+
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+
+    if (isRegistering) {
+        const confirmPassword = document.getElementById('confirmPassword').value;
+        const firstName = document.getElementById('firstName').value;
+        const lastName = document.getElementById('lastName').value;
+        const phone = document.getElementById('phone').value;
+
+        // Sprawdź, czy hasła się zgadzają
+        if (password !== confirmPassword) {
+            document.getElementById('message').textContent = 'Hasła nie pasują do siebie.';
+            return;
+        }
+
+        // Sprawdź, czy wszystkie wymagane pola rejestracji są wypełnione
+        if (!email || !password || !confirmPassword || !firstName || !lastName || !phone) {
+            document.getElementById('message').textContent = 'Wszystkie pola są wymagane.';
+            return;
+        }
+
+        try {
+            const response = await fetch('https://mremiza.ospklobuck.pl/api/register.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email, password, first_name: firstName, last_name: lastName, phone }),
+            });
+
+            const data = await response.json();
+
+            if (data.success) {
+                alert('Rejestracja zakończona sukcesem. Możesz się zalogować.');
+                toggleForm(); // Przełącz na formularz logowania
+            } else {
+                document.getElementById('message').textContent = 'Błąd rejestracji: ' + data.error;
+            }
+        } catch (error) {
+            document.getElementById('message').textContent = 'Wystąpił błąd: ' + error.message;
+        }
+    } else {
+        try {
+            const response = await fetch('https://mremiza.ospklobuck.pl/api/login.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email, password }),
+            });
+
+            const data = await response.json();
+
+            if (data.success) {
+                sessionStorage.setItem('user_name', data.name);
+                sessionStorage.setItem('user_id', data.user_id);
+                sessionStorage.setItem('admin', data.admin ? '1' : '0');
+                window.location.href = 'index.html'; // Przekieruj na stronę główną
+            } else {
+                document.getElementById('message').textContent = 'Błąd logowania: ' + data.error;
+            }
+        } catch (error) {
+            document.getElementById('message').textContent = 'Wystąpił błąd: ' + error.message;
+        }
+    }
+});
+
+// Funkcja przełączania formularza logowania/rejestracji
+function toggleForm() {
+    isRegistering = !isRegistering;
+    const formTitle = document.getElementById('formTitle');
+    const registrationFields = document.getElementById('registrationFields');
+    const submitButton = document.querySelector('#authForm button');
+    const toggleText = document.querySelector('.toggle');
+
+    if (isRegistering) {
+        formTitle.textContent = 'Rejestracja';
+        registrationFields.style.display = 'block';
+        submitButton.textContent = 'Zarejestruj';
+        toggleText.textContent = 'Masz już konto? Zaloguj się';
+    } else {
+        formTitle.textContent = 'Logowanie';
+        registrationFields.style.display = 'none';
+        submitButton.textContent = 'Zaloguj';
+        toggleText.textContent = 'Nie masz konta? Zarejestruj się';
+    }
+}
+
+
+    </script>
+</body>
+</html>

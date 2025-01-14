@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>mRemiza - Twoje wydarzenia</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+        }
+        .navbar {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .navbar h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+        .navbar .menu {
+            display: flex;
+            gap: 15px;
+        }
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            cursor: pointer;
+        }
+        .logout-btn {
+            background-color: #dc3545;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .container {
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .event {
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            padding: 15px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .event h2 {
+            margin: 0;
+            font-size: 20px;
+        }
+        .event p {
+            margin: 0;
+            font-size: 16px;
+            color: #6c757d;
+        }
+        footer {
+            background-color: #343a40;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Pasek nawigacyjny -->
+    <div class="navbar">
+        <h1>mRemiza</h1>
+        <div class="menu">
+            <a href="index.html">Wszystkie wydarzenia</a>
+            <a href="yours.html">Twoje wydarzenia</a>
+            <a href="user.html">Dane</a>
+        </div>
+        <button class="logout-btn" onclick="logout()">Wyloguj</button>
+    </div>
+
+    <!-- Główna zawartość -->
+    <div class="container" id="yourEvents">
+        <h2>Twoje wydarzenia</h2>
+        <div id="yourEventContainer"></div>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 mRemiza - Wszystkie prawa zastrzeżone</p>
+    </footer>
+
+    <script>
+    const userId = 1; // Ustaw prawidłowy user_id dla zalogowanego użytkownika
+
+   async function loadYourEvents() {
+    const userId = sessionStorage.getItem('user_id');
+
+    if (!userId) {
+        alert('Brak zalogowanego użytkownika. Zaloguj się ponownie.');
+        window.location.href = 'login.html';
+        return;
+    }
+
+    try {
+        const response = await fetch(`https://mremiza.ospklobuck.pl/api/your_events.php?user_id=${userId}`);
+        if (!response.ok) throw new Error(`HTTP Error: ${response.status}`);
+
+        const result = await response.json();
+        if (!result.success) {
+            throw new Error(result.error || 'Nieznany błąd');
+        }
+
+        const events = result.events;
+        const yourEventContainer = document.getElementById('yourEventContainer');
+        yourEventContainer.innerHTML = '';
+
+        if (events.length === 0) {
+            yourEventContainer.innerHTML = '<p>Brak wydarzeń, w których bierzesz udział.</p>';
+            return;
+        }
+
+        events.forEach(event => {
+            const eventElement = document.createElement('div');
+            eventElement.className = 'event';
+            eventElement.innerHTML = `
+                <h2>${event.title}</h2>
+                <p>${event.event_date || 'Brak daty'}</p>
+            `;
+            yourEventContainer.appendChild(eventElement);
+        });
+    } catch (error) {
+        console.error('Błąd ładowania Twoich wydarzeń:', error);
+        alert('Nie udało się załadować Twoich wydarzeń.');
+    }
+}
+
+// Załaduj wydarzenia po załadowaniu strony
+loadYourEvents();
+
+
+ async function checkAuthorization() {
+    try {
+        const response = await fetch('https://mremiza.ospklobuck.pl/api/auth_check.php');
+        const data = await response.json();
+        if (!data.success) {
+            alert('Brak autoryzacji. Zostaniesz przeniesiony na stronę logowania.');
+            window.location.href = 'login.html';
+        }
+    } catch (error) {
+        console.error('Błąd podczas weryfikacji autoryzacji:', error);
+        window.location.href = 'login.html';
+    }
+}
+checkAuthorization();
+
+</script>
+
+</body>
+</html>

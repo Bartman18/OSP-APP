@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>mRemiza - Wszystkie wydarzenia</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+        }
+        .navbar {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .navbar h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+        .navbar .menu {
+            display: flex;
+            gap: 15px;
+        }
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            cursor: pointer;
+        }
+        .container {
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .event {
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            padding: 15px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            cursor: pointer;
+        }
+        .event h2 {
+            margin: 0;
+            font-size: 20px;
+        }
+        .event p {
+            margin: 0;
+            font-size: 16px;
+            color: #6c757d;
+        }
+        .event-details {
+            margin-top: 10px;
+            display: none;
+        }
+        .event-details p {
+            margin: 5px 0;
+        }
+        .event-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+        }
+        .event-buttons button {
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .accept-btn {
+            background-color: #28a745;
+        }
+        .reject-btn {
+            background-color: #dc3545;
+        }
+        footer {
+            background-color: #343a40;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            margin-top: 20px;
+        }
+        .logout-btn {
+            background-color: #dc3545;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+         .admin-btn {
+            background-color: #00719C;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .admin-btn:disabled {
+            background-color: #6c757d;
+            cursor: not-allowed;
+        }
+        .navbar .actions {
+            margin-left: auto;
+            display: flex;
+            gap: 10px;
+        }
+        .add-event {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            background-color: #28a745;
+            color: white;
+            border-radius: 50%;
+            font-size: 24px;
+            text-decoration: none;
+            margin-left: 10px;
+        }
+        .add-event:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <h1>mRemiza</h1>
+        <div class="menu">
+            <a href="index.html">Wszystkie wydarzenia</a>
+            <a href="yours.html">Twoje wydarzenia</a>
+            <a href="user.html">Dane</a>
+        </div>
+        <div class="actions">
+            <button class="admin-btn" id="adminPanel" onclick="goToAdminPanel()">Admin Panel</button>
+            <button class="logout-btn" onclick="logout()">Wyloguj</button>
+        </div>
+    </div>
+
+    <div class="container" id="allEvents">
+        <h2>Wszystkie wydarzenia</h2>
+        <a href="event_add.html" class="add-event" title="Dodaj wydarzenie" style="margin:15px">+</a>
+        <div id="eventContainer"></div>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 mRemiza - Wszystkie prawa zastrzeżone</p>
+    </footer>
+
+    <script>
+        const userId = sessionStorage.getItem('user_id');
+        const isAdmin = sessionStorage.getItem('admin') === '1'; // Pobierz wartość admin
+
+        const adminButton = document.getElementById('adminPanel');
+
+        // Logika dla przycisku Admin Panel
+        if (!userId) {
+            adminButton.disabled = true;
+        } else if (!isAdmin) {
+            adminButton.disabled = true;
+        }
+
+        // Sprawdzamy, czy użytkownik jest zalogowany
+        if (!userId) {
+            alert('Brak zalogowanego użytkownika. Zaloguj się ponownie.');
+            window.location.href = 'login.html';
+        } else {
+            loadEvents(); // Ładujemy wydarzenia tylko wtedy, gdy użytkownik jest zalogowany
+        }
+
+        async function loadEvents() {
+    try {
+        const response = await fetch('https://mremiza.ospklobuck.pl/api/events.php');
+        if (!response.ok) throw new Error(`HTTP Error: ${response.status}`);
+
+        const result = await response.json();
+
+        if (!result.success) {
+            document.getElementById('eventContainer').innerHTML = '<p>Błąd ładowania wydarzeń.</p>';
+            return;
+        }
+
+        const events = result.events; // Dane z API
+        console.log('Otrzymane dane z API:', events);
+
+        const eventContainer = document.getElementById('eventContainer');
+        eventContainer.innerHTML = '';
+
+        if (events.length === 0) {
+            eventContainer.innerHTML = '<p>Brak dostępnych wydarzeń.</p>';
+            return;
+        }
+
+        events.forEach(event => {
+            const eventElement = document.createElement('div');
+            eventElement.className = 'event';
+            eventElement.innerHTML = `
+                <div>
+                    <h2>${event.title}</h2>
+                    <p>${event.event_date || 'Brak daty'} - ${event.place}</p>
+                    <p><strong>${event.participants}/${event.person_limit}</strong> uczestników</p>
+                </div>
+                <div class="event-details">
+                    <p><strong>Typ:</strong> ${event.type || 'Nieznany'}</p>
+                    <p><strong>Opis:</strong> ${event.description.replace(/\r\n/g, '<br>')}</p>
+                    <p><strong>Uczestnicy:</strong></p>
+                    <ul>
+                        ${
+                            event.participant_list 
+                            ? event.participant_list.split(', ').map((name, index) => `<li>${index + 1}. ${name}</li>`).join('')
+                            : '<li>Brak uczestników</li>'
+                        }
+                    </ul>
+                    <div class="event-buttons">
+                        <button class="accept-btn" onclick="handleParticipation(${event.event_id}, 'accepted')">Weź udział</button>
+                        <button class="reject-btn" onclick="handleParticipation(${event.event_id}, 'rejected')">Nie bierz udziału</button>
+                    </div>
+                </div>
+            `;
+            eventElement.addEventListener('click', () => {
+                const details = eventElement.querySelector('.event-details');
+                details.style.display = details.style.display === 'none' || details.style.display === '' ? 'block' : 'none';
+            });
+            eventContainer.appendChild(eventElement);
+        });
+    } catch (error) {
+        console.error('Błąd ładowania wydarzeń:', error);
+        document.getElementById('eventContainer').innerHTML = '<p>Nie udało się załadować wydarzeń.</p>';
+    }
+}
+
+
+        function goToAdminPanel() {
+            window.location.href = 'admin_index.html';
+        }
+
+       async function handleParticipation(eventId, status) {
+    try {
+        const response = await fetch('https://mremiza.ospklobuck.pl/api/events.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ user_id: userId, event_id: eventId, status }),
+        });
+
+        const result = await response.json();
+        if (result.success) {
+            alert(result.message);
+            loadEvents(); // Odświeża listę wydarzeń
+        } else {
+            alert(result.error);
+        }
+    } catch (error) {
+        console.error('Błąd podczas obsługi uczestnictwa:', error);
+        alert('Wystąpił błąd podczas obsługi uczestnictwa. Spróbuj ponownie później.');
+    }
+}
+
+
+        function logout() {
+            sessionStorage.clear();
+            alert('Wylogowano użytkownika.');
+            window.location.href = 'login.html';
+        }
+        async function checkAuthorization() {
+    try {
+        const response = await fetch('https://mremiza.ospklobuck.pl/api/auth_check.php');
+        const data = await response.json();
+        if (!data.success) {
+            window.location.href = 'login.html';
+        }
+    } catch (error) {
+        console.error('Błąd podczas weryfikacji autoryzacji:', error);
+        window.location.href = 'login.html';
+    }
+}
+checkAuthorization();
+
+    </script>
+</body>
+</html>
