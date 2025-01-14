@@ -5,7 +5,6 @@ import 'package:osp/components/initializer/initializer_provider.dart';
 import 'package:osp/components/onboarding/onboarding_provider.dart';
 import 'package:osp/components/sign_up/models/email_verification_arguments.dart';
 import 'package:osp/components/sign_up/sign_in_or_up_provider.dart';
-import 'package:osp/components/user_profile/user_profile_provider.dart';
 import 'package:osp/routes/notice/error_require_update.dart';
 import 'package:osp/components/settings/settings_provider.dart';
 import 'package:osp/components/general_views/dashboard/dashboard_provider.dart';
@@ -35,12 +34,7 @@ class Routes {
     if (settings.name == Routes.signUp) {
       return MaterialPageRoute(builder: (context) => SignInOrUpProvider(arguments: settings.arguments as SignInOrUpArgs));
     }
-    
-    if (settings.name == Routes.userProfile) {
-      return MaterialPageRoute(
-          builder: (context) =>
-              UserProfileProvider(arguments: settings.arguments as UserProfileArgs));
-    }
+
     if(settings.name == Routes.errorRequireUpdate) {
       return MaterialPageRoute(builder: (context) => const ErrorRequireUpdate());
     }

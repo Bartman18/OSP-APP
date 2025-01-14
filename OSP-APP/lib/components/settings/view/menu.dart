@@ -6,10 +6,8 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:osp/components/settings/bloc/settings_bloc.dart';
-import 'package:osp/components/settings/models/settings_model.dart';
 import 'package:osp/core/appearance.dart';
 import 'package:osp/core/helpers.dart';
-import 'package:osp/core/repositories/settings.dart';
 import 'package:osp/core/repositories/user.dart';
 import 'package:osp/core/routes.dart';
 import 'package:osp/widgets/bottom_navigation/bottom_bar.dart';
@@ -34,8 +32,6 @@ class _SettingsMenuState extends State<SettingsMenu> {
   final int _formControlLength = 10;
 
   final UserRepository _userRepository = GetIt.instance<UserRepository>();
-  final SettingsRepository _settingsRepository =
-  GetIt.instance<SettingsRepository>();
 
   Widget _buildSettings() {
     return Padding(
@@ -218,28 +214,6 @@ class _SettingsMenuState extends State<SettingsMenu> {
         children: [
           const SizedBox(height: 20),
           AppSupportButton(
-            headerText: 'settings_view.rules.header'.tr(),
-            bottomText: 'settings_view.rules.hint'.tr(),
-            onClick: () {
-            if ('' == _settingsRepository.public.urls.regulations) {
-              return;
-            }
-            launchUrl(
-              Uri.parse(_settingsRepository.public.urls.regulations));
-            },
-            child: SvgPicture.asset('assets/icons/info.svg', width: 20),
-          ),
-          AppSupportButton(
-            headerText: 'settings_view.subscription.header'.tr(),
-            bottomText: 'settings_view.subscription.hint'.tr(),
-            onClick: () {
-              context
-                  .read<SettingsBloc>()
-                  .add(const ChangeView(view: SettingsView.subscription));
-          },
-            child: SvgPicture.asset('assets/icons/diamond.svg', width: 20),
-          ),
-          AppSupportButton(
             headerText: 'settings_view.prizes.header'.tr(),
             bottomText: 'settings_view.prizes.hint'.tr(),
             onClick: () {
@@ -271,17 +245,7 @@ class _SettingsMenuState extends State<SettingsMenu> {
             },
             child: Image.asset('assets/icons/credit_card.png', width: 20),
           ),
-          AppSupportButton(
-            headerText: 'settings_view.rate.header'.tr(),
-            bottomText: 'settings_view.rate.hint'.tr(),
-            onClick: () {
-              if ('' == _settingsRepository.public.store.url) {
-                return;
-              }
-              launchUrl(Uri.parse(_settingsRepository.public.store.url));
-            },
-            child: Image.asset('assets/icons/review.png', width: 20),
-          ),
+          
           AppSupportButton(
             headerText: 'settings_view.pushNotifications.header'.tr(),
             bottomText: 'settings_view.pushNotifications.hint'.tr(),
@@ -333,48 +297,7 @@ class _SettingsMenuState extends State<SettingsMenu> {
             ),
           ),
           const SizedBox(height: 5),
-          Row(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              TextButton(
-                onPressed: () {
-                  if ('' == _settingsRepository.public.urls.regulations) {
-                    return;
-                  }
-
-                  launchUrl(
-                      Uri.parse(_settingsRepository.public.urls.regulations));
-                },
-                child: Text(
-                  'signUp.terms_and_conditions'.tr(),
-                  style: TextStyle(
-                    color: CoreColors.white.withAlpha(153),
-                    fontSize: Theme.of(context).textTheme.displaySmall!.fontSize!,
-                    fontVariations: CoreTheme.baseTextStyle.fontVariations,
-                  ),
-                ),
-              ),
-              TextButton(
-                onPressed: () {
-                  if ('' == _settingsRepository.public.urls.privacyPolicy) {
-                    return;
-                  }
-
-                  launchUrl(
-                      Uri.parse(_settingsRepository.public.urls.privacyPolicy));
-                },
-                child: Text(
-                  'signUp.privacy_policy'.tr(),
-                  style: TextStyle(
-                    color: CoreColors.white.withAlpha(153),
-                    fontSize: Theme.of(context).textTheme.displaySmall!.fontSize!,
-                    fontVariations: CoreTheme.baseTextStyle.fontVariations,
-                  ),
-                ),
-              )
-            ],
-          )
+          
         ],
       ),
     );

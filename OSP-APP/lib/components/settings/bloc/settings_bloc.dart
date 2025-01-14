@@ -22,8 +22,6 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
     on<ChangeNotifications>(_onChangeNotifications,
         transformer: Helpers.blocThrottleDroppable());
     on<Logout>(_onLogout, transformer: Helpers.blocThrottleDroppable());
-    on<Support>(_onSupport,
-        transformer: Helpers.blocThrottleDroppable());
   }
 
   Future<void> _onChangeView(
@@ -39,7 +37,6 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
     _user.profile.notifications = event.notifications;
     GetStorage()
         .write(SettingsDictionary.notifications, _user.profile.notifications);
-    await User().updateNotifications(_user.profile.notifications);
 
     emit(state.copyWith(
         action: SettingsAction.idle, status: StateStatus.loaded));
@@ -50,21 +47,5 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
     _user.profile.purgeModel();
     User().logout();
     emit(state.copyWith(action: SettingsAction.logout));
-  }
-
-  Future<void> _onSupport(
-      Support event, Emitter<SettingsState> emit) async {
-    ApiResponse? response;
-
-    if ('support' == event.messageType) {
-      response = await User().support(event.message);
-      emit(state.copyWith(
-          action: SettingsAction.support, status: StateStatus.loaded));
-    }
-
-    if (response?.status == ApiResponseStatus.success) {
-      emit(state.copyWith(
-          action: SettingsAction.idle, status: StateStatus.loaded));
-    }
   }
 }

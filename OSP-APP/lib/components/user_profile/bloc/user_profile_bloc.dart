@@ -39,33 +39,7 @@ class UserProfileBloc extends Bloc<UserProfileEvent, UserProfileState> {
     Map<String, dynamic> jsonModel = model.toJSON();
     GetStorage().write(SettingsDictionary.localUserProfile, jsonModel);
 
-    ApiResponse profileUpdate = await User().updateProfile(model);
 
-    if (ApiResponseStatus.failure == profileUpdate.status) {
-      emit(state.copyWith(
-          status: StateStatus.error,
-          statusMessage: '',
-          errorMessage: 'errors.user_profile.cant_save'.tr()));
-      return;
+
     }
-
-    if (model.profilePicture.isNotEmpty) {
-      ApiResponse profilePictureUpdate = await User().updateProfilePicture(model.profilePicture);
-
-      if (ApiResponseStatus.failure == profilePictureUpdate.status) {
-        emit(state.copyWith(
-            status: StateStatus.error,
-            statusMessage: '',
-            errorMessage: 'errors.user_profile.saved_but_without_pfp'.tr()));
-        return;
-      }
-
-      String picture = profilePictureUpdate.content['url'] ?? '';
-
-      if ('' != picture) {
-        _repository.profile.profilePicture = picture;
-      }
-    }
-    emit(state.copyWith(status: StateStatus.goToNextScreen, statusMessage: ''));
   }
-}

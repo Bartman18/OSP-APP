@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -9,7 +11,6 @@ import 'package:osp/components/sign_up/bloc/sign_up_bloc.dart';
 import 'package:osp/components/sign_up/bloc/sign_up_event.dart';
 import 'package:osp/components/sign_up/bloc/sign_up_state.dart';
 import 'package:osp/components/sign_up/sign_in_or_up_provider.dart';
-import 'package:osp/components/user_profile/user_profile_provider.dart';
 import 'package:osp/config/onboarding_config.dart';
 import 'package:osp/core/appearance.dart';
 import 'package:osp/core/enums/statuses.dart';
@@ -39,17 +40,12 @@ class _SignInOrUpState extends State<SignInOrUp> {
 
   bool _isSignIn(SignInOrUpContext ctx) => SignInOrUpContext.signIn == ctx;
 
-  
-  String _getImagePath(SignInOrUpContext context) => 'assets/signUp/${context.name}.jpeg';
-
   String _getTitle(SignInOrUpContext context) {
-    String prefix = 'signIn' == context.name ? 'sign_in' : 'sign_up';
-    return '$prefix.title'.tr();
+    return 'Zaloguj się';
   }
 
   String _getSubTitle(SignInOrUpContext context) {
-    String prefix = 'signIn' == context.name ? 'sign_in' : 'sign_up';
-    return '$prefix.sub_title'.tr();
+    return 'Proszę';
   }
 
   Widget _buildLoginForm(SignInOrUpContext signInOrUpContext) {
@@ -65,22 +61,15 @@ class _SignInOrUpState extends State<SignInOrUp> {
             keyboardType: TextInputType.emailAddress,
             textAlign: TextAlign.start,
             textAlignVertical: TextAlignVertical.top,
-            style: CoreTheme.baseTextStyle.copyWith(color: CoreColors.black),
+            style: CoreTheme.baseTextStyle.copyWith(color: CoreColors.white),
             decoration: customInputDecoration(paddingValue: defaultInputPadding).copyWith(
-              hintText: '$prefix.form.email_hint'.tr(),
-              hintStyle: CoreTheme.thinTextStyle.copyWith(color: CoreColors.black.withAlpha(80)),
+              hintText: 'example@gmail.com',
+              hintStyle: CoreTheme.thinTextStyle.copyWith(color: CoreColors.white.withAlpha(80)),
               errorStyle: errorStyle,
-              prefixIcon: Padding(
-                padding: const EdgeInsets.only(left: 16, right: 12),
-                child: SvgPicture.asset(
-                  'assets/signUp/email_icon.svg',
-                  height: defaultInputPadding,
-                ),
-              ),
             ),
             validator: FormBuilderValidators.compose([
-              FormBuilderValidators.required(errorText: 'signUp.form.errors.required'.tr()),
-              FormBuilderValidators.email(errorText: 'signUp.form.errors.email'.tr()),
+              FormBuilderValidators.required(errorText: 'Gdzie mail skurwielu'),
+              FormBuilderValidators.email(errorText: 'To chyba nie jest mail ;)'),
             ]),
           ),
           const SizedBox(height: defaultInputPadding),
@@ -91,18 +80,11 @@ class _SignInOrUpState extends State<SignInOrUp> {
             textAlignVertical: TextAlignVertical.top,
             obscureText: _obscureText,
             obscuringCharacter: '*',
-            style: CoreTheme.baseTextStyle.copyWith(color: CoreColors.black),
+            style: CoreTheme.baseTextStyle.copyWith(color: CoreColors.white),
             decoration: customInputDecoration(paddingValue: defaultInputPadding).copyWith(
-              hintText: '$prefix.form.password_hint'.tr(),
-              hintStyle: CoreTheme.thinTextStyle.copyWith(color: CoreColors.black.withAlpha(80)),
+              hintText: 'twoja_data_urodzin1234',
+              hintStyle: CoreTheme.thinTextStyle.copyWith(color: CoreColors.white.withAlpha(80)),
               errorStyle: errorStyle,
-              prefixIcon: Padding(
-                padding: const EdgeInsets.only(left: 16, right: 12),
-                child: SvgPicture.asset(
-                  'assets/signUp/password_icon.svg',
-                  height: defaultInputPadding,
-                ),
-              ),
               suffixIcon: Padding(
                 padding: const EdgeInsets.only(left: 12, right: 16),
                 child: IconButton(
@@ -116,10 +98,10 @@ class _SignInOrUpState extends State<SignInOrUp> {
               ),
             ),
             validator: FormBuilderValidators.compose([
-              FormBuilderValidators.required(errorText: 'signUp.form.errors.required'.tr()),
+              FormBuilderValidators.required(errorText: 'cos zjebałes'),
               FormBuilderValidators.minLength(
                 SettingsDictionary.passwordMinLength,
-                errorText: 'errors.generic.minLength'.tr(
+                errorText: 'za małego masz'.tr(
                   namedArgs: {'count': '${SettingsDictionary.passwordMinLength}'},
                 ),
               ),
@@ -133,7 +115,7 @@ class _SignInOrUpState extends State<SignInOrUp> {
 
   Widget _buildSubmitButton(SignUpState state) {
     return AppElevatedButton(
-      buttonText: _isSignIn(state.context) ? 'sign_in.button_text'.tr() : 'sign_up.button_text'.tr(),
+      buttonText:'lognij sie plis',
       //textColor: Colors.white,
       buttonStyle: ButtonStyle(
         padding: const WidgetStatePropertyAll(EdgeInsets.symmetric(horizontal: 50, vertical: 15)),
@@ -145,14 +127,16 @@ class _SignInOrUpState extends State<SignInOrUp> {
           return;
         }
 
+        final String name = "asd";
+        final String lastName = "Cifdapior";
         final String email = _formKey.currentState!.fields[FormFieldNames.email.name]?.value;
+        final String phone = "000050500";
         final String password = _formKey.currentState!.fields[FormFieldNames.password.name]?.value;
-
-        if (_isSignIn(state.context)) {
-          context.read<SignUpBloc>().add(SignInWithCredentials(email, password));
-        } else {
-          context.read<SignUpBloc>().add(SaveEmailAndPassword(email, password));
-        }
+        //if (_isSignIn(state.context)) {
+          //context.read<SignUpBloc>().add(SignInWithCredentials(email, password));
+        //} else {
+          context.read<SignUpBloc>().add(SaveEmailAndPassword(name, lastName ,email, phone, password));
+        //}
       },
     );
   }
@@ -164,12 +148,6 @@ class _SignInOrUpState extends State<SignInOrUp> {
       listener: (BuildContext context, SignUpState state) {
         if (state.status == StateStatus.goToNextScreen) {
           String route = Routes.home;
-
-          if (state.canLogIn && state.context == SignInOrUpContext.signIn && !state.userSetName) {
-            Navigator.pushReplacementNamed(context, Routes.userProfile,
-                arguments: UserProfileArgs(isEditMode: false));
-            return;
-          }
 
           if (state.canLogIn && state.context == SignInOrUpContext.signIn) {
             Navigator.pushReplacementNamed(context, Routes.home);
@@ -187,8 +165,6 @@ class _SignInOrUpState extends State<SignInOrUp> {
             route = Routes.home;
           }
 
-          Navigator.pushNamedAndRemoveUntil(context, route, (Route route) => false,
-              arguments: state.isRegisterEvent ? UserProfileArgs(isEditMode: false) : null);
         }
 
         if (state.status == StateStatus.error) {
@@ -207,8 +183,6 @@ class _SignInOrUpState extends State<SignInOrUp> {
             children: [
               Container(
                 decoration: BoxDecoration(
-                    image: DecorationImage(
-                        image: AssetImage(_getImagePath(state.context)), fit: BoxFit.cover),
                     color: CoreColors.primary),
               ),
               Container(

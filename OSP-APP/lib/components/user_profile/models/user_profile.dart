@@ -1,7 +1,5 @@
 import 'dart:convert';
 
-import 'package:osp/components/user_profile/models/user_fridge_model.dart';
-import 'package:osp/components/user_profile/models/user_score_model.dart';
 import 'package:osp/core/settings_dict.dart';
 
 class AppleIntegration {
@@ -100,8 +98,6 @@ class UserProfileModel {
   DateTime? createdAt;
   DateTime? updatedAt;
   DateTime? twoFactorConfirmedAt;
-  UserFridgeModel? fridge;
-  UserScoreModel? score;
 
   bool notifications;
 
@@ -117,8 +113,6 @@ class UserProfileModel {
     this.createdAt,
     this.updatedAt,
     this.twoFactorConfirmedAt,
-    this.fridge,
-    this.score,
   }) {
     integrations ??= UserIntegrations();
   }
@@ -137,8 +131,6 @@ class UserProfileModel {
       twoFactorConfirmedAt: data['twoFactorConfirmedAt'] != null
           ? DateTime.parse(data['twoFactorConfirmedAt'])
           : null,
-      fridge: data['fridge'] != null ? UserFridgeModel.fromJson(data['fridge']) : null,
-      score: data['score'] != null ? UserScoreModel.fromJson(data['score']) : null,
     );
 
     userProfile.notifications = (data['notifications'] ?? DefaultSettingsDictionary.notifications);
